@@ -19,8 +19,8 @@ impl Leetcode {
     // 3: /problems/longest-substring-without-repeating-characters/
     pub fn length_of_longest_substring(s: String) -> i32 {
         let mut last_seen: HashMap<char, i32> = HashMap::new();
-        let mut start:i32 = 0;
-        let mut longest:i32 = 0;
+        let mut start = 0;
+        let mut longest = 0;
         for (i, c) in s.chars().enumerate() {
             if let Some(&last_index) = last_seen.get(&c) {
                 if last_index >= start {
@@ -31,6 +31,33 @@ impl Leetcode {
             last_seen.insert(c, i as i32);
         }
         longest
+    }
+
+    // 5: /problems/longest-palindromic-substring/
+    pub fn longest_palindromic_substring(s: String) -> String {
+        if s.len() < 2 || s.chars().eq(s.chars().rev()) {
+            return s.to_string();
+        }
+        let mut start = -1;
+        let mut ml = 0;
+        for i in 0..s.len() {
+            let odd = if i as i32 - ml - 1 >= 0 {
+                &s[i - ml as usize - 1..=i]
+            } else {""};
+            let even = if i as i32 - ml >= 0 {
+                &s[i - ml as usize..=i]
+            } else {""};
+            if !odd.is_empty() && odd.chars().eq(odd.chars().rev()) {
+                start = i as i32 - ml - 1;
+                ml += 2;
+                continue;
+            }
+            if !even.is_empty() && even.chars().eq(even.chars().rev()) {
+                start = i as i32 - ml;
+                ml += 1;
+            }
+        }
+        s.chars().skip(start as usize).take(ml as usize).collect()
     }
 
 }
