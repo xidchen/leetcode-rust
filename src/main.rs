@@ -6,6 +6,7 @@ fn main() {
     two_sum();
     length_of_longest_substring();
     longest_palindromic_substring();
+    convert();
 }
 
 // 1: /problems/two-sum/
@@ -28,4 +29,12 @@ fn longest_palindromic_substring() {
     let s:String = String::from("babad");
     let result:String = Leetcode::longest_palindromic_substring(s);
     println!("Longest palindromic substring: {:?}", result);
+}
+
+// 6: /problems/zigzag-conversion/
+fn convert() {
+    let s:String = String::from("PAYPALISHIRING");
+    let num_rows:i32 = 3;
+    let result:String = Leetcode::convert(s, num_rows);
+    println!("Zigzag conversion: {:?}", result);
 }

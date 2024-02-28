@@ -60,4 +60,26 @@ impl Leetcode {
         s.chars().skip(start as usize).take(ml as usize).collect()
     }
 
+    // 6: /problems/zigzag-conversion/
+    pub fn convert(s: String, num_rows: i32) -> String {
+        if num_rows == 1 || s.len() < num_rows as usize {
+            return s.to_string();
+        }
+        let mut zigzag: Vec<String> = vec![String::new(); num_rows as usize];
+        let mut row: usize = 0;
+        let mut step: isize = 1;
+        for c in s.chars() {
+            zigzag[row].push(c);
+            if row == 0 {
+                step = 1;
+            }
+            if row == (num_rows - 1) as usize {
+                step = -1;
+            }
+            row = (row as isize + step) as usize;
+        }
+        let res: String = zigzag.into_iter().collect();
+        res
+    }
+
 }
