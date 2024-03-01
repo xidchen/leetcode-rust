@@ -19,8 +19,8 @@ impl Leetcode {
     // 3: /problems/longest-substring-without-repeating-characters/
     pub fn length_of_longest_substring(s: String) -> i32 {
         let mut last_seen: HashMap<char, i32> = HashMap::new();
-        let mut start = 0;
-        let mut longest = 0;
+        let mut start: i32 = 0;
+        let mut longest: i32 = 0;
         for (i, c) in s.chars().enumerate() {
             if let Some(&last_index) = last_seen.get(&c) {
                 if last_index >= start {
@@ -38,8 +38,8 @@ impl Leetcode {
         if s.len() < 2 || s.chars().eq(s.chars().rev()) {
             return s.to_string();
         }
-        let mut start = -1;
-        let mut ml = 0;
+        let mut start: i32 = -1;
+        let mut ml: i32 = 0;
         for i in 0..s.len() {
             let odd = if i as i32 - ml - 1 >= 0 {
                 &s[i - ml as usize - 1..=i]
@@ -80,6 +80,26 @@ impl Leetcode {
         }
         let res: String = zigzag.into_iter().collect();
         res
+    }
+
+    // 7: /problems/reverse-integer/
+    pub fn reverse(x: i32) -> i32 {
+        let mut x: i32 = x;
+        let negative: bool = x < 0;
+        let mut y: i64 = 0;
+        if x < 0 {
+            x = match x.checked_neg() {
+                Some(negated) => negated,
+                None => return 0,
+            };
+        }
+        while x != 0 {
+            y = y * 10 + (x % 10) as i64;
+            x /= 10;
+        }
+        if y > i32::MAX as i64 { return 0; }
+        let result: i32 = if negative { -y as i32 } else { y as i32 };
+        result
     }
 
 }
