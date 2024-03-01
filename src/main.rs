@@ -44,5 +44,5 @@ fn convert() {
 fn reverse() {
     let x: i32 = -2147483648;
     let result: i32 = Leetcode::reverse(x);
-    println!("Reverse: {:?}", result);
+    println!("Reverse integer: {:?}", result);
 }
