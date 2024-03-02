@@ -102,4 +102,28 @@ impl Leetcode {
         result
     }
 
+    // 8: /problems/string-to-integer-atoi/
+    pub fn my_atoi(s: String) -> i32 {
+        let s = s.trim_start();
+        if s.is_empty() { return 0; }
+        let mut chars = s.chars();
+        let mut sign = 1;
+        if let Some(c) = chars.next() {
+            if c == '+' || c == '-' {
+                sign = if c == '-' { -1 } else { 1 };
+            } else if c.is_ascii_digit() {
+                chars = s.chars();
+            } else { return 0; }
+        }
+        let mut res: i64 = 0;
+        for c in chars {
+            if c.is_ascii_digit() {
+                res = res * 10 + (c as i64 - '0' as i64);
+                if res * sign > i32::MAX as i64 { return i32::MAX; }
+                if res * sign < i32::MIN as i64 { return i32::MIN; }
+            } else { break; }
+        }
+        (res * sign) as i32
+    }
+
 }

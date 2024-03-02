@@ -8,6 +8,7 @@ fn main() {
     longest_palindromic_substring();
     convert();
     reverse();
+    my_atoi();
 }
 
 // 1: /problems/two-sum/
@@ -45,4 +46,11 @@ fn reverse() {
     let x: i32 = -2147483648;
     let result: i32 = Leetcode::reverse(x);
     println!("Reverse integer: {:?}", result);
+}
+
+// 8: /problems/string-to-integer-atoi/
+fn my_atoi() {
+    let s: String = String::from(" -273 degree ");
+    let result: i32 = Leetcode::my_atoi(s);
+    println!("String to integer (atoi): {:?}", result);
 }
