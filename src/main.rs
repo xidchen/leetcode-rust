@@ -2,15 +2,6 @@ mod leetcode;
 
 use leetcode::Leetcode;
 
-fn main() {
-    two_sum();
-    length_of_longest_substring();
-    longest_palindromic_substring();
-    convert();
-    reverse();
-    my_atoi();
-}
-
 // 1: /problems/two-sum/
 fn two_sum() {
     let nums: Vec<i32> = vec![2, 7, 11, 15];
@@ -53,4 +44,21 @@ fn my_atoi() {
     let s: String = String::from(" -273 degree ");
     let result: i32 = Leetcode::my_atoi(s);
     println!("String to integer (atoi): {:?}", result);
+}
+
+// 9: /problems/palindrome-number/
+fn is_palindrome() {
+    let x: i32 = 121;
+    let result: bool = Leetcode::is_palindrome(x);
+    println!("Is palindrome: {:?}", result);
+}
+
+fn main() {
+    two_sum();
+    length_of_longest_substring();
+    longest_palindromic_substring();
+    convert();
+    reverse();
+    my_atoi();
+    is_palindrome();
 }
