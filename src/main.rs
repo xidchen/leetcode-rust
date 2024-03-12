@@ -53,6 +53,14 @@ fn is_palindrome() {
     println!("Is palindrome: {:?}", result);
 }
 
+// 10: /problems/regular-expression-matching/
+fn is_match() {
+    let s: String = String::from("aa");
+    let p: String = String::from("a*");
+    let result: bool = Leetcode::is_match(s, p);
+    println!("Regular expression matching: {:?}", result);
+}
+
 fn main() {
     two_sum();
     length_of_longest_substring();
@@ -61,4 +69,5 @@ fn main() {
     reverse();
     my_atoi();
     is_palindrome();
+    is_match();
 }

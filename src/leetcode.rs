@@ -132,4 +132,22 @@ impl Leetcode {
         s == s.chars().rev().collect::<String>()
     }
 
+    // 10: /problems/regular-expression-matching/
+    pub fn is_match(s: String, p: String) -> bool {
+        let s_chars: Vec<char> = s.chars().collect();
+        let p_chars: Vec<char> = p.chars().collect();
+        let mut dp = vec![vec![false; p_chars.len() + 1]; s_chars.len() + 1];
+        dp[s_chars.len()][p_chars.len()] = true;
+        for i in (0..=s_chars.len()).rev() {
+            for j in (0..p_chars.len()).rev() {
+                let first_match = i < s_chars.len() && (p_chars[j] == s_chars[i] || p_chars[j] == '.');
+                if j + 1 < p_chars.len() && p_chars[j + 1] == '*' {
+                    dp[i][j] = dp[i][j + 2] || (first_match && dp[i + 1][j]);
+                } else {
+                    dp[i][j] = first_match && dp[i + 1][j + 1];
+                }
+            }
+        }
+        dp[0][0]
+    }
 }
