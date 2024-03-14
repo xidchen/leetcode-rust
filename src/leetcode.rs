@@ -150,4 +150,17 @@ impl Leetcode {
         }
         dp[0][0]
     }
+
+    // 11: /problems/container-with-most-water/
+    pub fn max_area(height: Vec<i32>) -> i32 {
+        let mut max_area = 0;
+        let mut i = 0;
+        let mut j = height.len() - 1;
+        while i < j {
+            max_area = std::cmp::max(max_area, std::cmp::min(height[i], height[j]) * (j - i) as i32);
+            if height[i] < height[j] { i += 1; }
+            else { j -= 1; }
+        }
+        max_area
+    }
 }
