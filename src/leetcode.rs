@@ -140,7 +140,8 @@ impl Leetcode {
         dp[s_chars.len()][p_chars.len()] = true;
         for i in (0..=s_chars.len()).rev() {
             for j in (0..p_chars.len()).rev() {
-                let first_match = i < s_chars.len() && (p_chars[j] == s_chars[i] || p_chars[j] == '.');
+                let first_match = i < s_chars.len() &&
+                    (p_chars[j] == s_chars[i] || p_chars[j] == '.');
                 if j + 1 < p_chars.len() && p_chars[j + 1] == '*' {
                     dp[i][j] = dp[i][j + 2] || (first_match && dp[i + 1][j]);
                 } else {
@@ -157,10 +158,32 @@ impl Leetcode {
         let mut i = 0;
         let mut j = height.len() - 1;
         while i < j {
-            max_area = std::cmp::max(max_area, std::cmp::min(height[i], height[j]) * (j - i) as i32);
+            max_area = std::cmp::max(
+                max_area, std::cmp::min(height[i], height[j]) * (j - i) as i32
+            );
             if height[i] < height[j] { i += 1; }
             else { j -= 1; }
         }
         max_area
     }
+
+    // 12: /problems/integer-to-roman/
+    pub fn int_to_roman(num: i32) -> String {
+        let mapping = vec![
+            (1000, "M"), (900, "CM"), (500, "D"), (400, "CD"),
+            (100, "C"), (90, "XC"), (50, "L"), (40, "XL"),
+            (10, "X"), (9, "IX"), (5, "V"), (4, "IV"),
+            (1, "I"),
+        ];
+        let mut romans = String::new();
+        let mut num = num;
+        for &(i, roman) in &mapping {
+            while i <= num {
+                num -= i;
+                romans.push_str(roman);
+            }
+        }
+        romans
+    }
+
 }

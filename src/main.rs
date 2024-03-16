@@ -68,6 +68,13 @@ fn max_area() {
     println!("Container with most water: {:?}", result);
 }
 
+// 12: /problems/integer-to-roman/
+fn int_to_roman() {
+    let num: i32 =2024;
+    let result: String = Leetcode::int_to_roman(num);
+    println!("Integer to roman: {:?}", result);
+}
+
 fn main() {
     two_sum();
     length_of_longest_substring();
@@ -78,4 +85,5 @@ fn main() {
     is_palindrome();
     is_match();
     max_area();
+    int_to_roman();
 }
