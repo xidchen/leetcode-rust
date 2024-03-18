@@ -70,9 +70,16 @@ fn max_area() {
 
 // 12: /problems/integer-to-roman/
 fn int_to_roman() {
-    let num: i32 =2024;
+    let num: i32 = 2024;
     let result: String = Leetcode::int_to_roman(num);
     println!("Integer to roman: {:?}", result);
+}
+
+// 13: /problems/roman-to-integer/
+fn roman_to_int() {
+    let s: String = String::from("MMXXIV");
+    let result: i32 = Leetcode::roman_to_int(s);
+    println!("Roman to integer: {:?}", result);
 }
 
 fn main() {
@@ -86,4 +93,5 @@ fn main() {
     is_match();
     max_area();
     int_to_roman();
+    roman_to_int();
 }

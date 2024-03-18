@@ -1,12 +1,10 @@
-use std::collections::HashMap;
-
 pub struct Leetcode;
 
 impl Leetcode {
 
     // 1: /problems/two-sum/
     pub fn two_sum(nums: Vec<i32>, target: i32) -> Vec<i32> {
-        let mut dic: HashMap<i32, usize> = HashMap::new();
+        let mut dic: std::collections::HashMap<i32, usize> = std::collections::HashMap::new();
         for (i, &n) in nums.iter().enumerate() {
             if let Some(&prev_index) = dic.get(&n) {
                 return vec![prev_index as i32, i as i32];
@@ -18,7 +16,7 @@ impl Leetcode {
 
     // 3: /problems/longest-substring-without-repeating-characters/
     pub fn length_of_longest_substring(s: String) -> i32 {
-        let mut last_seen: HashMap<char, i32> = HashMap::new();
+        let mut last_seen: std::collections::HashMap<char, i32> = std::collections::HashMap::new();
         let mut start: i32 = 0;
         let mut longest: i32 = 0;
         for (i, c) in s.chars().enumerate() {
@@ -184,6 +182,33 @@ impl Leetcode {
             }
         }
         romans
+    }
+
+    // 13: /problems/roman-to-integer/
+    pub fn roman_to_int(s: String) -> i32 {
+        let mut d: std::collections::HashMap<char, i32> = std::collections::HashMap::new();
+        d.insert('I', 1);
+        d.insert('V', 5);
+        d.insert('X', 10);
+        d.insert('L', 50);
+        d.insert('C', 100);
+        d.insert('D', 500);
+        d.insert('M', 1000);
+        let mut integer = 0;
+        let mut prev_int = 0;
+        for roman in s.chars().rev() {
+            match d.get(&roman) {
+                Some(&value) if value >= prev_int => {
+                    prev_int = value;
+                    integer += value;
+                },
+                Some(&value) => {
+                    integer -= value;
+                },
+                _ => (),
+            }
+        }
+        integer
     }
 
 }
