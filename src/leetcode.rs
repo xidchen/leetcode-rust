@@ -211,4 +211,18 @@ impl Leetcode {
         integer
     }
 
+    // 14: /problems/longest-common-prefix/
+    pub fn longest_common_prefix(strs: Vec<String>) -> String {
+        if strs.is_empty() { return String::new(); }
+        if strs.len() == 1 { return strs[0].clone(); }
+        let mut strs = strs;
+        strs.sort();
+        let mut result = String::new();
+        for (a, b) in strs[0].chars().zip(strs.last().unwrap().chars()) {
+            if a == b { result.push(a); }
+            else { break; }
+        }
+        result
+    }
+
 }

@@ -82,6 +82,13 @@ fn roman_to_int() {
     println!("Roman to integer: {:?}", result);
 }
 
+// 14: /problems/longest-common-prefix/
+fn longest_common_prefix() {
+    let strs: Vec<String> = vec!["flower".to_string(), "flow".to_string(), "flight".to_string()];
+    let result: String = Leetcode::longest_common_prefix(strs);
+    println!("Longest common prefix: {:?}", result);
+}
+
 fn main() {
     two_sum();
     length_of_longest_substring();
@@ -94,4 +101,5 @@ fn main() {
     max_area();
     int_to_roman();
     roman_to_int();
+    longest_common_prefix();
 }
