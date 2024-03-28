@@ -225,4 +225,35 @@ impl Leetcode {
         result
     }
 
+    // 15: /problems/3sum
+    pub fn three_sum(nums: Vec<i32>) -> Vec<Vec<i32>> {
+        let mut dic: std::collections::HashMap<i32, usize> = std::collections::HashMap::new();
+        let mut res: Vec<Vec<i32>> = Vec::new();
+        for &n in &nums {
+            *dic.entry(n).or_insert(0) += 1;
+        }
+        let mut sorted_nums: Vec<i32> = dic.keys().cloned().collect();
+        sorted_nums.sort_unstable();
+        for (i, &x) in sorted_nums.iter().enumerate() {
+            if x == 0 {
+                if *dic.get(&x).unwrap_or(&0) > 2 {
+                    res.push(vec![0, 0, 0]);
+                }
+            } else if *dic.get(&x).unwrap_or(&0) > 1 && dic.contains_key(&(-2 * x)) {
+                res.push(vec![x, x, -2 * x]);
+            }
+            if x < 0 {
+                for j in (i + 1)..sorted_nums.len() {
+                    let y = sorted_nums[j];
+                    let z = -x - y;
+                    if z <= y { break; }
+                    if dic.contains_key(&z) && z != y {
+                        res.push(vec![x, y, z]);
+                    }
+                }
+            }
+        }
+        res
+    }
+
 }

@@ -89,6 +89,13 @@ fn longest_common_prefix() {
     println!("Longest common prefix: {:?}", result);
 }
 
+// 15: /problems/3sum
+fn three_sum() {
+    let nums: Vec<i32> = vec![-1, 0, 1, 2, -1, -4];
+    let result: Vec<Vec<i32>> = Leetcode::three_sum(nums);
+    println!("Three sum: {:?}", result);
+}
+
 fn main() {
     two_sum();
     length_of_longest_substring();
@@ -102,4 +109,5 @@ fn main() {
     int_to_roman();
     roman_to_int();
     longest_common_prefix();
+    three_sum();
 }
