@@ -104,6 +104,13 @@ fn three_sum_closest() {
     println!("Three sum closest: {:?}", result)
 }
 
+// 17: /problems/letter-combinations-of-a-phone-number/
+fn letter_combinations() {
+    let digits: String = String::from("38");
+    let result: Vec<String> = Leetcode::letter_combinations(digits);
+    println!("Letter combination: {:?}", result);
+}
+
 fn main() {
     two_sum();
     length_of_longest_substring();
@@ -119,4 +126,5 @@ fn main() {
     longest_common_prefix();
     three_sum();
     three_sum_closest();
+    letter_combinations();
 }
