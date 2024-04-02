@@ -96,6 +96,14 @@ fn three_sum() {
     println!("Three sum: {:?}", result);
 }
 
+// 16: /problems/3sum-closest/
+fn three_sum_closest() {
+    let nums: Vec<i32> = vec![4, 0, 5, -5, 3, 3, 0, -4, -5];
+    let target: i32 = -2;
+    let result: i32 = Leetcode::three_sum_closest(nums, target);
+    println!("Three sum closest: {:?}", result)
+}
+
 fn main() {
     two_sum();
     length_of_longest_substring();
@@ -110,4 +118,5 @@ fn main() {
     roman_to_int();
     longest_common_prefix();
     three_sum();
+    three_sum_closest();
 }

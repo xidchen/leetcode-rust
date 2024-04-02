@@ -21,9 +21,7 @@ impl Leetcode {
         let mut longest: i32 = 0;
         for (i, c) in s.chars().enumerate() {
             if let Some(&last_index) = last_seen.get(&c) {
-                if last_index >= start {
-                    start = last_index + 1;
-                }
+                if last_index >= start { start = last_index + 1; }
             }
             longest = longest.max(i as i32 - start + 1);
             last_seen.insert(c, i as i32);
@@ -229,16 +227,12 @@ impl Leetcode {
     pub fn three_sum(nums: Vec<i32>) -> Vec<Vec<i32>> {
         let mut dic: std::collections::HashMap<i32, usize> = std::collections::HashMap::new();
         let mut res: Vec<Vec<i32>> = Vec::new();
-        for &n in &nums {
-            *dic.entry(n).or_insert(0) += 1;
-        }
+        for &n in &nums { *dic.entry(n).or_insert(0) += 1; }
         let mut sorted_nums: Vec<i32> = dic.keys().cloned().collect();
         sorted_nums.sort_unstable();
         for (i, &x) in sorted_nums.iter().enumerate() {
             if x == 0 {
-                if *dic.get(&x).unwrap_or(&0) > 2 {
-                    res.push(vec![0, 0, 0]);
-                }
+                if *dic.get(&x).unwrap_or(&0) > 2 { res.push(vec![0, 0, 0]);}
             } else if *dic.get(&x).unwrap_or(&0) > 1 && dic.contains_key(&(-2 * x)) {
                 res.push(vec![x, x, -2 * x]);
             }
@@ -247,10 +241,29 @@ impl Leetcode {
                     let y = sorted_nums[j];
                     let z = -x - y;
                     if z <= y { break; }
-                    if dic.contains_key(&z) && z != y {
-                        res.push(vec![x, y, z]);
-                    }
+                    if dic.contains_key(&z) && z != y { res.push(vec![x, y, z]); }
                 }
+            }
+        }
+        res
+    }
+
+    // 16: /problems/3sum-closest/
+    pub fn three_sum_closest(nums: Vec<i32>, target: i32) -> i32 {
+        let n = nums.len();
+        let mut nums = nums;
+        nums.sort();
+        let mut res = nums[0] + nums[1] + nums[2];
+        for i in 0..n - 2 {
+            let (mut j, mut k) = (i + 1, n - 1);
+            if nums[i] + nums[j] + nums[j + 1] >= target { k = j + 1; }
+            if nums[i] + nums[k - 1] + nums[k] <= target { j = k - 1; }
+            while j < k {
+                let s = nums[i] + nums[j] + nums[k];
+                if (target - s).abs() < (target - res).abs() { res = s; }
+                if s == target { return res; }
+                if s < target { j += 1; }
+                if s > target { k -= 1; }
             }
         }
         res
