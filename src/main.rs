@@ -111,6 +111,14 @@ fn letter_combinations() {
     println!("Letter combination: {:?}", result);
 }
 
+// 18: /problems/4sum/
+fn four_sum() {
+    let nums: Vec<i32> = vec![0,0,0,1000000000,1000000000,1000000000,1000000000];
+    let target: i32 = 1000000000;
+    let result: Vec<Vec<i32>> = Leetcode::four_sum(nums, target);
+    println!("Four sum: {:?}", result);
+}
+
 fn main() {
     two_sum();
     length_of_longest_substring();
@@ -127,4 +135,5 @@ fn main() {
     three_sum();
     three_sum_closest();
     letter_combinations();
+    four_sum();
 }

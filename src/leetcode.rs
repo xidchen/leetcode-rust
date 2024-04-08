@@ -298,4 +298,42 @@ impl Leetcode {
         results
     }
 
+    // 18: /problems/4sum/
+    pub fn four_sum(nums: Vec<i32>, target: i32) -> Vec<Vec<i32>> {
+        fn k_sum(n: Vec<i64>, t: i64, k: i64) -> Vec<Vec<i32>> {
+            let mut res: Vec<Vec<i32>> = Vec::new();
+            if n.len() < k as usize || t < n[0] * k || n[n.len() - 1] * k < t { return res; }
+            if k == 2 { return two_sum(n, t); }
+            for i in 0..n.len() {
+                if i == 0 || n[i - 1] != n[i] {
+                    for mut set in k_sum(n[i + 1..].to_vec(), t - n[i], k - 1) {
+                        set.insert(0, n[i] as i32);
+                        res.push(set);
+                    }
+                }
+            }
+            res
+        }
+
+        fn two_sum(n: Vec<i64>, t: i64) -> Vec<Vec<i32>> {
+            let mut res: Vec<Vec<i32>> = Vec::new();
+            let (mut lo, mut hi) = (0, n.len() - 1);
+            while lo < hi {
+                let sum: i64 = n[lo] + n[hi];
+                if sum < t || (0 < lo && n[lo] == n[lo - 1]) { lo += 1; }
+                else if t < sum || (hi < n.len() - 1 && n[hi] == n[hi + 1]) { hi -= 1; }
+                else {
+                    res.push(vec![n[lo] as i32, n[hi] as i32]);
+                    lo += 1;
+                    hi -= 1;
+                }
+            }
+            res
+        }
+
+        let mut nums: Vec<i64> = nums.clone().into_iter().map(|x| x as i64).collect();
+        nums.sort();
+        k_sum(nums, target as i64, 4)
+    }
+
 }
