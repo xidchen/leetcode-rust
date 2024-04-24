@@ -1,3 +1,5 @@
+use crate::structs::ListNode;
+
 pub struct Leetcode;
 
 impl Leetcode {
@@ -12,6 +14,32 @@ impl Leetcode {
             dic.insert(target - n, i);
         }
         Vec::new()
+    }
+
+    // 2: /problems/add-two-numbers/
+    pub fn add_two_numbers(
+        l1: Option<Box<ListNode>>,
+        l2: Option<Box<ListNode>>
+    ) -> Option<Box<ListNode>> {
+        let mut l1: Option<Box<ListNode>> = l1;
+        let mut l2: Option<Box<ListNode>> = l2;
+        let mut dummy: Box<ListNode> = Box::new(ListNode::new(0));
+        let mut current: &mut Box<ListNode> = &mut dummy;
+        let mut carry: i32 = 0;
+        while l1.is_some() || l2.is_some() || carry > 0 {
+            if let Some(l1_node) = &l1 {
+                carry += l1_node.val;
+                l1 = l1_node.next.clone();
+            }
+            if let Some(l2_node) = &l2 {
+                carry += l2_node.val;
+                l2 = l2_node.next.clone();
+            }
+            current.next = Some(Box::new(ListNode::new(carry % 10)));
+            current = current.next.as_mut().unwrap();
+            carry /= 10;
+        }
+        dummy.next
     }
 
     // 3: /problems/longest-substring-without-repeating-characters/
