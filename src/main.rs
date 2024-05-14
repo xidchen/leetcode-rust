@@ -4,6 +4,25 @@ mod structs;
 use leetcode::Leetcode;
 use structs::ListNode;
 
+fn list_to_linked_list(nums: Vec<i32>) -> Option<Box<ListNode>> {
+    let mut dummy: Box<ListNode> = Box::new(ListNode::new(0));
+    let mut current: &mut Box<ListNode> = &mut dummy;
+    for num in nums {
+        current.next = Some(Box::new(ListNode::new(num)));
+        current = current.next.as_mut().unwrap();
+    }
+    dummy.next
+}
+
+fn linked_list_to_list(mut node: Option<Box<ListNode>>) -> Vec<i32> {
+    let mut nums: Vec<i32> = Vec::new();
+    while let Some(current) = node {
+        nums.push(current.val);
+        node = current.next;
+    }
+    nums
+}
+
 // 1: /problems/two-sum/
 fn two_sum() {
     let nums: Vec<i32> = vec![2, 7, 11, 15];
@@ -14,26 +33,6 @@ fn two_sum() {
 
 // 2: /problems/add-two-numbers/
 fn add_two_numbers() {
-
-    fn list_to_linked_list(nums: Vec<i32>) -> Option<Box<ListNode>> {
-        let mut dummy: Box<ListNode> = Box::new(ListNode::new(0));
-        let mut current: &mut Box<ListNode> = &mut dummy;
-        for num in nums {
-            current.next = Some(Box::new(ListNode::new(num)));
-            current = current.next.as_mut().unwrap();
-        }
-        dummy.next
-    }
-
-    fn linked_list_to_list(mut node: Option<Box<ListNode>>) -> Vec<i32> {
-        let mut nums: Vec<i32> = Vec::new();
-        while let Some(current) = node {
-            nums.push(current.val);
-            node = current.next;
-        }
-        nums
-    }
-
     let l1: Option<Box<ListNode>> = list_to_linked_list(vec![9, 9, 9, 9, 9, 9, 9]);
     let l2: Option<Box<ListNode>> = list_to_linked_list(vec![9, 9, 9, 9]);
     let result_link_list: Option<Box<ListNode>> = Leetcode::add_two_numbers(l1, l2);
