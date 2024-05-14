@@ -364,4 +364,30 @@ impl Leetcode {
         k_sum(nums, target as i64, 4)
     }
 
+    // 19: /problems/remove-nth-node-from-end-of-list/
+    pub fn remove_nth_from_end(head: Option<Box<ListNode>>, n: i32) -> Option<Box<ListNode>> {
+        let mut dummy: Box<ListNode> = Box::new(ListNode::new(0));
+        dummy.next = head;
+        let mut first: *const ListNode = &*dummy;
+        let mut second: *mut ListNode = &mut *dummy;
+        for _ in 0..n {
+            unsafe {
+                if let Some(ref next) = (*first).next { first = &**next; }
+                else { return dummy.next; }
+            }
+        }
+        unsafe {
+            while let Some(ref next) = (*first).next {
+                first = &**next;
+                if let Some(next_second) = (*second).next.as_mut() {
+                    second = &mut **next_second;
+                }
+            }
+            if let Some(ref mut next) = (*second).next {
+                (*second).next = next.next.take();
+            }
+        }
+        dummy.next
+    }
+
 }

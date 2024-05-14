@@ -149,6 +149,15 @@ fn four_sum() {
     println!("Four sum: {:?}", result);
 }
 
+// 19: /problems/remove-nth-node-from-end-of-list/
+fn remove_nth_from_end() {
+    let head: Option<Box<ListNode>> = list_to_linked_list(vec![1, 2, 3, 4, 5]);
+    let n: i32 = 2;
+    let result_link_list: Option<Box<ListNode>> = Leetcode::remove_nth_from_end(head, n);
+    let result: Vec<i32> = linked_list_to_list(result_link_list);
+    println!("Remove nth node from end of list: {:?}", result);
+}
+
 fn main() {
     two_sum();
     add_two_numbers();
@@ -167,4 +176,5 @@ fn main() {
     three_sum_closest();
     letter_combinations();
     four_sum();
+    remove_nth_from_end();
 }
