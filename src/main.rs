@@ -158,6 +158,13 @@ fn remove_nth_from_end() {
     println!("Remove nth node from end of list: {:?}", result);
 }
 
+// 20: /problems/valid-parentheses/
+fn is_valid() {
+    let s: String = String::from("()[]{}");
+    let result: bool = Leetcode::is_valid(s);
+    println!("Valid parenthesis: {:?}", result);
+}
+
 fn main() {
     two_sum();
     add_two_numbers();
@@ -177,4 +184,5 @@ fn main() {
     letter_combinations();
     four_sum();
     remove_nth_from_end();
+    is_valid();
 }

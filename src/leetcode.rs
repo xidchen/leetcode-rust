@@ -390,4 +390,22 @@ impl Leetcode {
         dummy.next
     }
 
+    // 20: /problems/valid-parentheses/
+    pub fn is_valid(s: String) -> bool {
+        let d: std::collections::HashMap<char, char> = [
+            ('(', ')'), ('[', ']'), ('{', '}')
+        ].iter().cloned().collect();
+        let mut stack: Vec<char> = Vec::new();
+        for x in s.chars() {
+            if d.contains_key(&x) { stack.push(x); }
+            else {
+                if let Some(&top) = stack.last() {
+                    if d.get(&top) == Some(&x) { stack.pop(); }
+                    else { return false; }
+                } else { return false; }
+            }
+        }
+        stack.is_empty()
+    }
+
 }
