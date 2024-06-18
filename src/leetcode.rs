@@ -396,14 +396,9 @@ impl Leetcode {
             ('(', ')'), ('[', ']'), ('{', '}')
         ].iter().cloned().collect();
         let mut stack: Vec<char> = Vec::new();
-        for x in s.chars() {
-            if d.contains_key(&x) { stack.push(x); }
-            else {
-                if let Some(&top) = stack.last() {
-                    if d.get(&top) == Some(&x) { stack.pop(); }
-                    else { return false; }
-                } else { return false; }
-            }
+        for c in s.chars() {
+            if d.contains_key(&c) { stack.push(c); }
+            else { if stack.is_empty() || d[&stack.pop().unwrap()] != c { return false; } }
         }
         stack.is_empty()
     }
