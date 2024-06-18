@@ -165,6 +165,15 @@ fn is_valid() {
     println!("Valid parenthesis: {:?}", result);
 }
 
+// 21: /problems/merge-two-sorted-lists/
+fn merge_two_lists() {
+    let list1: Option<Box<ListNode>> = list_to_linked_list(vec![1, 2, 4]);
+    let list2: Option<Box<ListNode>> = list_to_linked_list(vec![1, 3, 4]);
+    let result_link_list: Option<Box<ListNode>> = Leetcode::merge_two_lists(list1, list2);
+    let result: Vec<i32> = linked_list_to_list(result_link_list);
+    println!("Merge two sorted lists: {:?}", result)
+}
+
 fn main() {
     two_sum();
     add_two_numbers();
@@ -185,4 +194,5 @@ fn main() {
     four_sum();
     remove_nth_from_end();
     is_valid();
+    merge_two_lists();
 }

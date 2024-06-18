@@ -403,4 +403,30 @@ impl Leetcode {
         stack.is_empty()
     }
 
+    // 21: /problems/merge-two-sorted-lists/
+    pub fn merge_two_lists(
+        mut l1: Option<Box<ListNode>>,
+        mut l2: Option<Box<ListNode>>,
+    ) -> Option<Box<ListNode>> {
+        let mut dummy: Box<ListNode> = Box::new(ListNode::new(0));
+        let mut prev: &mut Box<ListNode> = &mut dummy;
+        while let (
+            Some(node1),
+            Some(node2)
+        ) = (l1.as_mut(), l2.as_mut()) {
+            if node1.val < node2.val {
+                let next: Option<Box<ListNode>> = node1.next.take();
+                prev.next = l1;
+                l1 = next;
+            } else {
+                let next: Option<Box<ListNode>> = node2.next.take();
+                prev.next = l2;
+                l2 = next;
+            }
+            prev = prev.next.as_mut().unwrap();
+        }
+        prev.next = if l1.is_some() { l1 } else { l2 };
+        dummy.next
+    }
+
 }
