@@ -429,4 +429,20 @@ impl Leetcode {
         dummy.next
     }
 
+    // 22: /problems/generate-parentheses/
+    pub fn generate_parenthesis(n: i32) -> Vec<String> {
+        fn backtrack(res: &mut Vec<String>, s: String, left: i32, right: i32, n: i32) {
+            if s.len() == (2 * n) as usize {
+                res.push(s);
+                return;
+            }
+            if left < n { backtrack(res, s.clone() + "(", left + 1, right, n); }
+            if right < left { backtrack(res, s.clone() + ")", left, right + 1, n); }
+        }
+
+        let mut result = Vec::new();
+        backtrack(&mut result, String::new(), 0, 0, n);
+        result
+    }
+
 }

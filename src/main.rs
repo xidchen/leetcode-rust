@@ -171,7 +171,14 @@ fn merge_two_lists() {
     let list2: Option<Box<ListNode>> = list_to_linked_list(vec![1, 3, 4]);
     let result_link_list: Option<Box<ListNode>> = Leetcode::merge_two_lists(list1, list2);
     let result: Vec<i32> = linked_list_to_list(result_link_list);
-    println!("Merge two sorted lists: {:?}", result)
+    println!("Merge two sorted lists: {:?}", result);
+}
+
+// 22: /problems/generate-parentheses/
+fn generate_parenthesis() {
+    let n: i32 = 3;
+    let result: Vec<String> = Leetcode::generate_parenthesis(n);
+    println!("Generate parentheses: {:?}", result);
 }
 
 fn main() {
@@ -195,4 +202,5 @@ fn main() {
     remove_nth_from_end();
     is_valid();
     merge_two_lists();
+    generate_parenthesis();
 }
