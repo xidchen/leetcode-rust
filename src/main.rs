@@ -181,6 +181,18 @@ fn generate_parenthesis() {
     println!("Generate parentheses: {:?}", result);
 }
 
+// 23: /problems/merge-k-sorted-lists/
+fn merge_k_lists() {
+    let lists: Vec<Option<Box<ListNode>>> = vec![
+        list_to_linked_list(vec![1, 4, 5]),
+        list_to_linked_list(vec![1, 3, 4]),
+        list_to_linked_list(vec![2, 6]),
+    ];
+    let result_link_list: Option<Box<ListNode>> = Leetcode::merge_k_lists(lists);
+    let result: Vec<i32> = linked_list_to_list(result_link_list);
+    println!("Merge k linked lists: {:?}", result)
+}
+
 fn main() {
     two_sum();
     add_two_numbers();
@@ -203,4 +215,5 @@ fn main() {
     is_valid();
     merge_two_lists();
     generate_parenthesis();
+    merge_k_lists()
 }

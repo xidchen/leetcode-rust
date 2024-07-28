@@ -1,5 +1,27 @@
 use crate::structs::ListNode;
 
+struct ListNodeWrapper(Box<ListNode>);
+
+impl Ord for ListNodeWrapper {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        other.0.val.cmp(&self.0.val)
+    }
+}
+
+impl PartialOrd for ListNodeWrapper {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl PartialEq for ListNodeWrapper {
+    fn eq(&self, other: &Self) -> bool {
+        self.0.val == other.0.val
+    }
+}
+
+impl Eq for ListNodeWrapper {}
+
 pub struct Leetcode;
 
 impl Leetcode {
@@ -443,6 +465,20 @@ impl Leetcode {
         let mut result = Vec::new();
         backtrack(&mut result, String::new(), 0, 0, n);
         result
+    }
+
+    // 23: /problems/merge-k-sorted-lists/
+    pub fn merge_k_lists(lists: Vec<Option<Box<ListNode>>>) -> Option<Box<ListNode>> {
+        let mut heap = std::collections::BinaryHeap::new();
+        for list in lists.into_iter().flatten() { heap.push(ListNodeWrapper(list)); }
+        let mut dummy = ListNode::new(0);
+        let mut prev = &mut dummy;
+        while let Some(ListNodeWrapper(mut node)) = heap.pop() {
+            if let Some(next) = node.next.take() { heap.push(ListNodeWrapper(next)); }
+            prev.next = Some(node);
+            prev = prev.next.as_mut().unwrap();
+        }
+        dummy.next
     }
 
 }
