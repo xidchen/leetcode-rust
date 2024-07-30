@@ -190,7 +190,7 @@ fn merge_k_lists() {
     ];
     let result_link_list: Option<Box<ListNode>> = Leetcode::merge_k_lists(lists);
     let result: Vec<i32> = linked_list_to_list(result_link_list);
-    println!("Merge k linked lists: {:?}", result)
+    println!("Merge k sorted lists: {:?}", result)
 }
 
 fn main() {
