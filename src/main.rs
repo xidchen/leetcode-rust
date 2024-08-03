@@ -193,6 +193,14 @@ fn merge_k_lists() {
     println!("Merge k sorted lists: {:?}", result)
 }
 
+// 24: /problems/swap-nodes-in-pairs/
+fn swap_pairs() {
+    let head: Option<Box<ListNode>> = list_to_linked_list(vec![1, 2, 3, 4, 5, 6]);
+    let result_link_list: Option<Box<ListNode>> = Leetcode::swap_pairs(head);
+    let result: Vec<i32> = linked_list_to_list(result_link_list);
+    println!("Swap nodes in pairs: {:?}", result);
+}
+
 fn main() {
     two_sum();
     add_two_numbers();
@@ -215,5 +223,6 @@ fn main() {
     is_valid();
     merge_two_lists();
     generate_parenthesis();
-    merge_k_lists()
+    merge_k_lists();
+    swap_pairs();
 }
