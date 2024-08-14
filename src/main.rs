@@ -9,7 +9,7 @@ fn list_to_linked_list(nums: Vec<i32>) -> Option<Box<ListNode>> {
     let mut current: &mut Box<ListNode> = &mut dummy;
     for num in nums {
         current.next = Some(Box::new(ListNode::new(num)));
-        current = current.next.as_mut().unwrap();
+        current = current.next.as_mut()?;
     }
     dummy.next
 }

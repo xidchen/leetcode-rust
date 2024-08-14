@@ -58,7 +58,7 @@ impl Leetcode {
                 l2 = l2_node.next.clone();
             }
             current.next = Some(Box::new(ListNode::new(carry % 10)));
-            current = current.next.as_mut().unwrap();
+            current = current.next.as_mut()?;
             carry /= 10;
         }
         dummy.next
@@ -445,7 +445,7 @@ impl Leetcode {
                 prev.next = l2;
                 l2 = next;
             }
-            prev = prev.next.as_mut().unwrap();
+            prev = prev.next.as_mut()?;
         }
         prev.next = if l1.is_some() { l1 } else { l2 };
         dummy.next
@@ -476,7 +476,7 @@ impl Leetcode {
         while let Some(ListNodeWrapper(mut node)) = heap.pop() {
             if let Some(next) = node.next.take() { heap.push(ListNodeWrapper(next)); }
             prev.next = Some(node);
-            prev = prev.next.as_mut().unwrap();
+            prev = prev.next.as_mut()?;
         }
         dummy.next
     }
@@ -486,13 +486,13 @@ impl Leetcode {
         let mut dummy = ListNode::new(0);
         dummy.next = head;
         let mut prev = &mut dummy;
-        while prev.next.is_some() && prev.next.as_ref().unwrap().next.is_some() {
-            let mut first = prev.next.take().unwrap();
-            let mut second = first.next.take().unwrap();
+        while prev.next.is_some() && prev.next.as_ref()?.next.is_some() {
+            let mut first = prev.next.take()?;
+            let mut second = first.next.take()?;
             first.next = second.next.take();
             second.next = Some(first);
             prev.next = Some(second);
-            prev = prev.next.as_mut().unwrap().next.as_mut().unwrap();
+            prev = prev.next.as_mut()?.next.as_mut()?;
         }
         dummy.next
     }
