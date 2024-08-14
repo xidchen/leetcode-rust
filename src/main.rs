@@ -201,6 +201,13 @@ fn swap_pairs() {
     println!("Swap nodes in pairs: {:?}", result);
 }
 
+// 26: /problems/remove-duplicates-from-sorted-array/
+fn remove_duplicates() {
+    let mut nums: Vec<i32> = vec![0, 0, 1, 1, 1, 2, 2, 3, 3, 4];
+    let result: i32 = Leetcode::remove_duplicates(&mut nums);
+    println!("Remove duplicates from sorted array: {:?}", result);
+}
+
 fn main() {
     two_sum();
     add_two_numbers();
@@ -225,4 +232,5 @@ fn main() {
     generate_parenthesis();
     merge_k_lists();
     swap_pairs();
+    remove_duplicates();
 }

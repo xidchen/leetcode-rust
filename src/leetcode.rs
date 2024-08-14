@@ -497,4 +497,16 @@ impl Leetcode {
         dummy.next
     }
 
+    // 26: /problems/remove-duplicates-from-sorted-array/
+    pub fn remove_duplicates(nums: &mut Vec<i32>) -> i32 {
+        let mut next_new = 0;
+        for i in 0..nums.len() {
+            if i == 0 || nums[i] != nums[i - 1] {
+                nums[next_new] = nums[i];
+                next_new += 1;
+            }
+        }
+        next_new as i32
+    }
+
 }
