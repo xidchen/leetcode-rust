@@ -208,6 +208,14 @@ fn remove_duplicates() {
     println!("Remove duplicates from sorted array: {:?}", result);
 }
 
+// 27: /problems/remove-element/
+fn remove_element() {
+    let mut nums: Vec<i32> = vec![0, 1, 2, 2, 3, 0, 4, 2];
+    let val: i32 = 2;
+    let result: i32 = Leetcode::remove_element(&mut nums, val);
+    println!("Remove element: {:?}", result);
+}
+
 fn main() {
     two_sum();
     add_two_numbers();
@@ -233,4 +241,5 @@ fn main() {
     merge_k_lists();
     swap_pairs();
     remove_duplicates();
+    remove_element();
 }
