@@ -388,27 +388,23 @@ impl Leetcode {
 
     // 19: /problems/remove-nth-node-from-end-of-list/
     pub fn remove_nth_from_end(head: Option<Box<ListNode>>, n: i32) -> Option<Box<ListNode>> {
-        let mut dummy: Box<ListNode> = Box::new(ListNode::new(0));
+        let mut dummy = Box::new(ListNode::new(0));
         dummy.next = head;
-        let mut first: *const ListNode = &*dummy;
-        let mut second: *mut ListNode = &mut *dummy;
+        let mut first = dummy.clone();
+        let mut second = &mut dummy;
         for _ in 0..n {
-            unsafe {
-                if let Some(ref next) = (*first).next { first = &**next; }
-                else { return dummy.next; }
+            if let Some(node) = first.next.take() {
+                first = node;
+            } else {
+                return dummy.next;
             }
         }
-        unsafe {
-            while let Some(ref next) = (*first).next {
-                first = &**next;
-                if let Some(next_second) = (*second).next.as_mut() {
-                    second = &mut **next_second;
-                }
-            }
-            if let Some(ref mut next) = (*second).next {
-                (*second).next = next.next.take();
-            }
+        while first.next.is_some() {
+            first = first.next.unwrap();
+            second = second.next.as_mut().unwrap();
         }
+        let next = second.next.take();
+        second.next = next.and_then(|node| node.next);
         dummy.next
     }
 
