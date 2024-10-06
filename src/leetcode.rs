@@ -517,4 +517,12 @@ impl Leetcode {
         k as i32
     }
 
+    // 28: /problems/find-the-index-of-the-first-occurrence-in-a-string/
+    pub fn str_str(haystack: String, needle: String) -> i32 {
+        match haystack.find(&needle) {
+            None => -1,
+            Some(index) => index as i32
+        }
+    }
+
 }

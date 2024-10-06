@@ -216,6 +216,14 @@ fn remove_element() {
     println!("Remove element: {:?}", result);
 }
 
+// 28: /problems/find-the-index-of-the-first-occurrence-in-a-string/
+fn str_str() {
+    let haystack: String = String::from("sadbutsad");
+    let needle: String = String::from("sad");
+    let result: i32 = Leetcode::str_str(haystack, needle);
+    println!("Find the index of the first occurrence in a string : {:?}", result);
+}
+
 fn main() {
     two_sum();
     add_two_numbers();
@@ -242,4 +250,5 @@ fn main() {
     swap_pairs();
     remove_duplicates();
     remove_element();
+    str_str();
 }
