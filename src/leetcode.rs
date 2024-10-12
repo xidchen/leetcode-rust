@@ -89,10 +89,10 @@ impl Leetcode {
         for i in 0..s.len() {
             let odd = if i as i32 - ml - 1 >= 0 {
                 &s[i - ml as usize - 1..=i]
-            } else {""};
+            } else { "" };
             let even = if i as i32 - ml >= 0 {
                 &s[i - ml as usize..=i]
-            } else {""};
+            } else { "" };
             if !odd.is_empty() && odd.chars().eq(odd.chars().rev()) {
                 start = i as i32 - ml - 1;
                 ml += 2;
@@ -207,8 +207,7 @@ impl Leetcode {
             max_area = std::cmp::max(
                 max_area, std::cmp::min(height[i], height[j]) * (j - i) as i32
             );
-            if height[i] < height[j] { i += 1; }
-            else { j -= 1; }
+            if height[i] < height[j] { i += 1; } else { j -= 1; }
         }
         max_area
     }
@@ -267,8 +266,7 @@ impl Leetcode {
         strs.sort();
         let mut result = String::new();
         for (a, b) in strs[0].chars().zip(strs.last().unwrap().chars()) {
-            if a == b { result.push(a); }
-            else { break; }
+            if a == b { result.push(a); } else { break; }
         }
         result
     }
@@ -282,7 +280,7 @@ impl Leetcode {
         sorted_nums.sort_unstable();
         for (i, &x) in sorted_nums.iter().enumerate() {
             if x == 0 {
-                if *dic.get(&x).unwrap_or(&0) > 2 { res.push(vec![0, 0, 0]);}
+                if *dic.get(&x).unwrap_or(&0) > 2 { res.push(vec![0, 0, 0]); }
             } else if *dic.get(&x).unwrap_or(&0) > 1 && dic.contains_key(&(-2 * x)) {
                 res.push(vec![x, x, -2 * x]);
             }
@@ -525,4 +523,26 @@ impl Leetcode {
         }
     }
 
+    // 29: /problems/divide-two-integers/
+    pub fn divide(dividend: i32, divisor: i32) -> i32 {
+        if dividend == i32::MIN && divisor == -1 { return i32::MAX; }
+        let diff_sign = (dividend < 0) ^ (divisor < 0);
+        let mut dividend = dividend as i64;
+        let mut divisor = divisor as i64;
+        let mut res = 0i32;
+        dividend = dividend.abs();
+        divisor = divisor.abs();
+        while dividend >= divisor {
+            let mut temp = divisor;
+            let mut multiple = 1;
+            while dividend >= (temp << 1) {
+                temp <<= 1;
+                multiple <<= 1;
+            }
+            dividend -= temp;
+            res += multiple;
+        }
+        if diff_sign { res = -res; }
+        res.max(i32::MIN).min(i32::MAX)
+    }
 }

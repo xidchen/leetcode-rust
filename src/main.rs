@@ -224,6 +224,14 @@ fn str_str() {
     println!("Find the index of the first occurrence in a string: {:?}", result);
 }
 
+// 29: /problems/divide-two-integers/
+fn divide() {
+    let dividend: i32 = 7;
+    let divisor: i32 = -3;
+    let result: i32 = Leetcode::divide(dividend, divisor);
+    println!("Divide two integers: {:?}", result);
+}
+
 fn main() {
     two_sum();
     add_two_numbers();
@@ -251,4 +259,5 @@ fn main() {
     remove_duplicates();
     remove_element();
     str_str();
+    divide();
 }
