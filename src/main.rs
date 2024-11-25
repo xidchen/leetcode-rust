@@ -232,6 +232,14 @@ fn divide() {
     println!("Divide two integers: {:?}", result);
 }
 
+// 30: /problems/substring-with-concatenation-of-all-words/
+fn find_substring() {
+    let s: String = String::from("barfoothefoobarman");
+    let words: Vec<String> = vec!["foo".to_string(), "bar".to_string()];
+    let result: Vec<i32> = Leetcode::find_substring(s, words);
+    println!("Substring with concatenation of all words: {:?}", result);
+}
+
 fn main() {
     two_sum();
     add_two_numbers();
@@ -260,4 +268,5 @@ fn main() {
     remove_element();
     str_str();
     divide();
+    find_substring();
 }

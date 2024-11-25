@@ -545,4 +545,47 @@ impl Leetcode {
         if diff_sign { res = -res; }
         res.max(i32::MIN).min(i32::MAX)
     }
+
+    // 30: /problems/substring-with-concatenation-of-all-words/
+    pub fn find_substring(s: String, words: Vec<String>) -> Vec<i32> {
+        let mut res = Vec::new();
+        if words.is_empty() || s.len() < words.len() * words[0].len() { return res; }
+        let wc = words.len();
+        let wl = words[0].len();
+        let sl = s.len();
+        let mut wd = std::collections::HashMap::new();
+        for w in words.iter() { *wd.entry(w).or_insert(0) += 1; }
+        for i in 0..wl {
+            let mut start = i;
+            let mut cnt = 0;
+            let mut tmp_dict = std::collections::HashMap::new();
+            let mut j = i;
+            while j <= sl - wl {
+                let word = s[j..j + wl].to_string();
+                if let Some(&count) = wd.get(&word) {
+                    cnt += 1;
+                    *tmp_dict.entry(word.clone()).or_insert(0) += 1;
+                    while tmp_dict[&word] > count {
+                        let start_word = s[start..start + wl].to_string();
+                        *tmp_dict.entry(start_word.clone()).or_insert(0) -= 1;
+                        start += wl;
+                        cnt -= 1;
+                    }
+                    if cnt == wc {
+                        res.push(start as i32);
+                        let start_word = &s[start..start + wl].to_string();
+                        *tmp_dict.entry(start_word.clone()).or_insert(0) -= 1;
+                        start += wl;
+                        cnt -= 1;
+                    }
+                } else {
+                    start = j + wl;
+                    cnt = 0;
+                    tmp_dict.clear();
+                }
+                j += wl;
+            }
+        }
+        res
+    }
 }
