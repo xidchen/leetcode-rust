@@ -240,6 +240,13 @@ fn find_substring() {
     println!("Substring with concatenation of all words: {:?}", result);
 }
 
+// 31: /problems/next-permutation/
+fn next_permutation() {
+    let mut result: Vec<i32> = vec![4, 5, 3, 2, 1];
+    Leetcode::next_permutation(&mut result);
+    println!("Next permutation: {:?}", result);
+}
+
 fn main() {
     two_sum();
     add_two_numbers();
@@ -269,4 +276,5 @@ fn main() {
     str_str();
     divide();
     find_substring();
+    next_permutation();
 }
