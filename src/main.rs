@@ -247,6 +247,13 @@ fn next_permutation() {
     println!("Next permutation: {:?}", result);
 }
 
+// 32: /problems/longest-valid-parentheses/
+fn longest_valid_parentheses() {
+    let s: String = String::from(")()())");
+    let result: i32 = Leetcode::longest_valid_parentheses(s);
+    println!("Longest valid parentheses: {:?}", result);
+}
+
 fn main() {
     two_sum();
     add_two_numbers();
@@ -277,4 +284,5 @@ fn main() {
     divide();
     find_substring();
     next_permutation();
+    longest_valid_parentheses();
 }
