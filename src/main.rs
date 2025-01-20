@@ -254,6 +254,14 @@ fn longest_valid_parentheses() {
     println!("Longest valid parentheses: {:?}", result);
 }
 
+// 33: /problems/search-in-rotated-sorted-array/
+fn search() {
+    let nums: Vec<i32> = vec![4, 5, 6, 7, 0, 1, 2];
+    let target: i32 = 0;
+    let result: i32 = Leetcode::search(nums, target);
+    println!("Search in rotated sorted array: {:?}", result);
+}
+
 fn main() {
     two_sum();
     add_two_numbers();
@@ -285,4 +293,5 @@ fn main() {
     find_substring();
     next_permutation();
     longest_valid_parentheses();
+    search();
 }
