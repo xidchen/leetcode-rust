@@ -639,4 +639,22 @@ impl Leetcode {
         }
         -1
     }
+
+    // 34: /problems/find-first-and-last-position-of-element-in-sorted-array/
+    pub fn search_range(nums: Vec<i32>, target: i32) -> Vec<i32> {
+        fn binary(nums: &Vec<i32>, tgt: f64, left: i32, right: i32) -> i32 {
+            let mut left = left;
+            let mut right = right;
+            while left <= right {
+                let mid = (left + right) / 2;
+                if tgt > nums[mid as usize] as f64 { left = mid + 1; }
+                else { right = mid - 1; }
+            }
+            left
+        }
+        let lower = binary(&nums, target as f64 - 0.5, 0, nums.len() as i32 - 1);
+        let upper = binary(&nums, target as f64 + 0.5, 0, nums.len() as i32 - 1);
+        if lower == upper { vec![-1, -1] }
+        else { vec![lower, upper - 1]}
+    }
 }

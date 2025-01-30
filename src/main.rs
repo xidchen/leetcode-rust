@@ -262,6 +262,14 @@ fn search() {
     println!("Search in rotated sorted array: {:?}", result);
 }
 
+// 34: /problems/find-first-and-last-position-of-element-in-sorted-array/
+fn search_range() {
+    let nums: Vec<i32> = vec![5, 7, 7, 8, 8, 10];
+    let target: i32 = 8;
+    let result: Vec<i32> = Leetcode::search_range(nums, target);
+    println!("Find first and last position of element in sorted array: {:?}", result);
+}
+
 fn main() {
     two_sum();
     add_two_numbers();
@@ -294,4 +302,5 @@ fn main() {
     next_permutation();
     longest_valid_parentheses();
     search();
+    search_range();
 }
