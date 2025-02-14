@@ -270,6 +270,14 @@ fn search_range() {
     println!("Find first and last position of element in sorted array: {:?}", result);
 }
 
+// 35: /problems/search-insert-position/
+fn search_insert() {
+    let nums: Vec<i32> = vec![1, 3, 5, 6];
+    let target: i32 = 0;
+    let result: i32 = Leetcode::search_insert(nums, target);
+    println!("Search insert position: {:?}", result);
+}
+
 fn main() {
     two_sum();
     add_two_numbers();
@@ -303,4 +311,5 @@ fn main() {
     longest_valid_parentheses();
     search();
     search_range();
+    search_insert()
 }
