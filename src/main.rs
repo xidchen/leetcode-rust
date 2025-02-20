@@ -278,6 +278,23 @@ fn search_insert() {
     println!("Search insert position: {:?}", result);
 }
 
+// 36: /problems/valid-sudoku/
+fn is_valid_sudoku() {
+    let board: Vec<Vec<char>> = vec![
+        vec!['5', '3', '.', '.', '7', '.', '.', '.', '.'],
+        vec!['6', '.', '.', '1', '9', '5', '.', '.', '.'],
+        vec!['.', '9', '8', '.', '.', '.', '.', '6', '.'],
+        vec!['8', '.', '.', '.', '6', '.', '.', '.', '3'],
+        vec!['4', '.', '.', '8', '.', '3', '.', '.', '1'],
+        vec!['7', '.', '.', '.', '2', '.', '.', '.', '6'],
+        vec!['.', '6', '.', '.', '.', '.', '2', '8', '.'],
+        vec!['.', '.', '.', '4', '1', '9', '.', '.', '5'],
+        vec!['.', '.', '.', '.', '8', '.', '.', '7', '9']
+    ];
+    let result: bool = Leetcode::is_valid_sudoku(board);
+    println!("Valid sudoku: {:?}", result);
+}
+
 fn main() {
     two_sum();
     add_two_numbers();
@@ -311,5 +328,6 @@ fn main() {
     longest_valid_parentheses();
     search();
     search_range();
-    search_insert()
+    search_insert();
+    is_valid_sudoku();
 }

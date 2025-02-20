@@ -670,4 +670,25 @@ impl Leetcode {
         }
         left
     }
+
+    // 36: /problems/valid-sudoku/
+    pub fn is_valid_sudoku(board: Vec<Vec<char>>) -> bool {
+        let mut rows: Vec<Vec<char>> = vec![vec![]; 9];
+        let mut cols: Vec<Vec<char>> = vec![vec![]; 9];
+        let mut boxes: Vec<Vec<char>> = vec![vec![]; 9];
+        for r in 0..9 {
+            for c in 0..9 {
+                let digit = board[r][c];
+                if digit == '.' { continue; }
+                let box_index = r / 3 * 3 + c / 3;
+                if rows[r].contains(&digit) 
+                    || cols[c].contains(&digit) 
+                    || boxes[box_index].contains(&digit) { return false; }
+                rows[r].push(digit);
+                cols[c].push(digit);
+                boxes[box_index].push(digit);
+            }
+        }
+        true
+    }
 }
