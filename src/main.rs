@@ -201,6 +201,15 @@ fn swap_pairs() {
     println!("Swap nodes in pairs: {:?}", result);
 }
 
+// 25: /problems/reverse-nodes-in-k-group/
+fn reverse_k_group() {
+    let head: Option<Box<ListNode>> = list_to_linked_list(vec![1, 2, 3, 4, 5]);
+    let k: i32 = 2;
+    let result_link_list: Option<Box<ListNode>> = Leetcode::reverse_k_group(head, k);
+    let result: Vec<i32> = linked_list_to_list(result_link_list);
+    println!("Reverse nodes in k group: {:?}", result);
+}
+
 // 26: /problems/remove-duplicates-from-sorted-array/
 fn remove_duplicates() {
     let mut nums: Vec<i32> = vec![0, 0, 1, 1, 1, 2, 2, 3, 3, 4];
@@ -319,6 +328,7 @@ fn main() {
     generate_parenthesis();
     merge_k_lists();
     swap_pairs();
+    reverse_k_group();
     remove_duplicates();
     remove_element();
     str_str();

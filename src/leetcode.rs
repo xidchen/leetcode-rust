@@ -491,6 +491,26 @@ impl Leetcode {
         dummy.next
     }
 
+    // 25: /problems/reverse-nodes-in-k-group/
+    pub fn reverse_k_group(head: Option<Box<ListNode>>, k: i32) -> Option<Box<ListNode>> {
+        if k < 2 { return head; }
+        let mut node = &head;
+        for _ in 0..k {
+            if node.is_none() { return head; }
+            node = &node.as_ref().unwrap().next;
+        }
+        let remainder = Self::reverse_k_group(node.clone(), k);
+        let mut prev = remainder;
+        let mut current = head;
+        for _ in 0..k {
+            let mut c = current.take().unwrap();
+            current = c.next.take();
+            c.next = prev;
+            prev = Some(c);
+        }
+        prev
+    }
+
     // 26: /problems/remove-duplicates-from-sorted-array/
     pub fn remove_duplicates(nums: &mut Vec<i32>) -> i32 {
         let mut next_new = 0;
