@@ -1,5 +1,11 @@
 use crate::structs::ListNode;
 
+#[derive(Clone, Debug)]
+enum Cell {
+    Single(char),
+    Multiple(std::collections::HashSet<char>),
+}
+
 struct ListNodeWrapper(Box<ListNode>);
 
 impl Ord for ListNodeWrapper {
@@ -710,5 +716,122 @@ impl Leetcode {
             }
         }
         true
+    }
+    
+    // 37: /problems/sudoku-solver/
+    pub fn solve_sudoku(board: &mut Vec<Vec<char>>) {
+        let size = 9;
+        let mut state = vec![vec![Cell::Single('.'); size]; size];
+        let mut new_digits = Vec::new();
+        for r in 0..size {
+            for c in 0..size {
+                let ch = board[r][c];
+                if ch == '.' {
+                    let set = ('1'..='9').collect::<std::collections::HashSet<char>>();
+                    state[r][c] = Cell::Multiple(set);
+                } else {
+                    state[r][c] = Cell::Single(ch);
+                    new_digits.push((r, c));
+                }
+            }
+        }
+        
+        fn eliminate(state: &mut [Vec<Cell>], r: usize, c: usize) {
+            let size = 9;
+            let digit = match &state[r][c] {
+                Cell::Single(d) => *d,
+                Cell::Multiple(_) => return,
+            };
+            for i in 0..size {
+                if let Cell::Multiple(possible) = &mut state[i][c] {
+                    possible.remove(&digit);
+                }
+                if let Cell::Multiple(possible) = &mut state[r][i] {
+                    possible.remove(&digit);
+                }
+            }
+            let box_row_start = (r / 3) * 3;
+            let box_col_start = (c / 3) * 3;
+            for rr in box_row_start..(box_row_start + 3) {
+                for cc in box_col_start..(box_col_start + 3) {
+                    if let Cell::Multiple(possible) = &mut state[rr][cc] {
+                        possible.remove(&digit);
+                    }
+                }
+            }
+        }
+        
+        fn find_new(state: &mut [Vec<Cell>], new_digits: &mut Vec<(usize, usize)>) {
+            let size = 9;
+            for r in 0..size {
+                for c in 0..size {
+                    if let Cell::Multiple(possible) = &state[r][c] {
+                        if possible.len() == 1 {
+                            let digit = *possible.iter().next().unwrap();
+                            state[r][c] = Cell::Single(digit);
+                            new_digits.push((r, c));
+                        }
+                    }
+                }
+            }
+        }
+        
+        fn is_valid(state: &[Vec<Cell>], r: usize, c: usize, digit: char) -> bool {
+            let size = 9;
+            for i in 0..size {
+                if let Cell::Single(d) = state[r][i] {
+                    if d == digit { return false; }
+                }
+                if let Cell::Single(d) = state[i][c] {
+                    if d == digit { return false; }
+                }
+            }
+            let box_row_start = (r / 3) * 3;
+            let box_col_start = (c / 3) * 3;
+            for rr in box_row_start..(box_row_start + 3) {
+                for cc in box_col_start..(box_col_start + 3) {
+                    if let Cell::Single(d) = state[rr][cc] {
+                        if d == digit { return false; }
+                    }
+                }
+            }
+            true
+        }
+        
+        fn solve_recursive(state: &mut[Vec<Cell>]) -> bool {
+            let size = 9;
+            for r in 0..size {
+                for c in 0..size {
+                    if let Cell::Single(_) = &state[r][c] { continue; }
+                    let candidates = match &state[r][c] {
+                        Cell::Multiple(possible) => possible.clone(),
+                        Cell::Single(_) => continue,
+                    };
+                    for &digit in &candidates {
+                        if is_valid(state, r, c, digit) {
+                            let old_cell = std::mem::replace(
+                                &mut state[r][c], Cell::Single(digit)
+                            );
+                            if solve_recursive(state) { return true; }
+                            state[r][c] = old_cell;
+                        }
+                    }
+                    return false
+                }
+            }
+            true
+        }
+        
+        while !new_digits.is_empty() {
+            for &(r, c) in new_digits.iter() { eliminate(&mut state, r, c); }
+            new_digits.clear();
+            find_new(&mut state, &mut new_digits);
+        }
+        solve_recursive(&mut state);
+        for r in 0..size {
+            for c in 0..size {
+                if let Cell::Single(d) = state[r][c] { board[r][c] = d; }
+            }
+        }
     }
 }

@@ -304,6 +304,27 @@ fn is_valid_sudoku() {
     println!("Valid sudoku: {:?}", result);
 }
 
+// 37: /problems/sudoku-solver/
+fn solve_sudoku() {
+    let mut board = vec![
+        vec!['4', '5', '.', '.', '.', '9', '3', '.', '1'],
+        vec!['.', '.', '.', '.', '8', '.', '9', '.', '.'],
+        vec!['.', '2', '.', '.', '.', '.', '.', '.', '.'],
+        vec!['.', '.', '2', '.', '.', '4', '.', '.', '.'],
+        vec!['.', '.', '8', '.', '.', '.', '.', '.', '3'],
+        vec!['3', '4', '.', '.', '7', '.', '.', '5', '.'],
+        vec!['1', '9', '.', '.', '.', '8', '.', '.', '5'],
+        vec!['.', '.', '3', '.', '.', '.', '.', '.', '.'],
+        vec!['.', '.', '.', '6', '.', '.', '.', '7', '.'],
+    ];
+    Leetcode::solve_sudoku(&mut board);
+    println!("Sudoku solver: [");
+    for row in &board {
+        println!("\t{:?}", row);
+    }
+    println!("]");
+}
+
 fn main() {
     two_sum();
     add_two_numbers();
@@ -340,4 +361,5 @@ fn main() {
     search_range();
     search_insert();
     is_valid_sudoku();
+    solve_sudoku();
 }
