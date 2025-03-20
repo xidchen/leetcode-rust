@@ -834,4 +834,23 @@ impl Leetcode {
             }
         }
     }
+
+    // 38: /problems/count-and-say/
+    pub fn count_and_say(n: i32) -> String {
+        let mut sequence: Vec<i32> = vec![1];
+        for _ in 0..n - 1 {
+            let mut next: Vec<i32> = Vec::new();
+            for &num in &sequence {
+                if next.is_empty() || next[next.len() - 1] != num {
+                    next.push(1);
+                    next.push(num);
+                } else {
+                    let len = next.len();
+                    next[len - 2] += 1;
+                }
+            }
+            sequence = next;
+        }
+        sequence.iter().map(|&i| i.to_string()).collect()
+    }
 }

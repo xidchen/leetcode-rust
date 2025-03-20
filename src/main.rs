@@ -325,6 +325,13 @@ fn solve_sudoku() {
     println!("]");
 }
 
+// 38: /problems/count-and-say/
+fn count_and_say() {
+    let n: i32 = 4;
+    let result: String = Leetcode::count_and_say(n);
+    println!("Count and say: {:?}", result);
+}
+
 fn main() {
     two_sum();
     add_two_numbers();
@@ -362,4 +369,5 @@ fn main() {
     search_insert();
     is_valid_sudoku();
     solve_sudoku();
+    count_and_say();
 }
