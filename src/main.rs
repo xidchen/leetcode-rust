@@ -332,6 +332,14 @@ fn count_and_say() {
     println!("Count and say: {:?}", result);
 }
 
+// 39: /problems/combination-sum/
+fn combination_sum() {
+    let candidates: Vec<i32> = vec![2, 3, 5];
+    let target: i32 = 8;
+    let result: Vec<Vec<i32>> = Leetcode::combination_sum(candidates, target);
+    println!("Combination sum: {:?}", result);
+}
+
 fn main() {
     two_sum();
     add_two_numbers();
@@ -370,4 +378,5 @@ fn main() {
     is_valid_sudoku();
     solve_sudoku();
     count_and_say();
+    combination_sum();
 }

@@ -765,4 +765,26 @@ impl Leetcode {
         }
         sequence.iter().map(|&i| i.to_string()).collect()
     }
+
+    // 39: /problems/combination-sum/
+    pub fn combination_sum(candidates: Vec<i32>, target: i32) -> Vec<Vec<i32>> {
+        let mut res: Vec<Vec<i32>> = Vec::new();
+        fn backtrack(nums: &[i32], nxt: usize, t: i32, p: &mut Vec<i32>, r: &mut Vec<Vec<i32>>) {
+            if t == 0 {
+                r.push(p.clone());
+                return;
+            }
+            if nxt == nums.len() { return; }
+            let mut i: i32 = 0;
+            while t - i * nums[nxt] >= 0 {
+                for _ in 0..i { p.push(nums[nxt]); }
+                backtrack(nums, nxt + 1, t - i * nums[nxt], p, r);
+                for _ in 0..i { p.pop(); }
+                i += 1;
+            }
+        }
+        let mut p = Vec::new();
+        backtrack(&candidates, 0, target, &mut p, &mut res);
+        res
+    }
 }
