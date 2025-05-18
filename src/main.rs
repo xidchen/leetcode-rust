@@ -340,6 +340,14 @@ fn combination_sum() {
     println!("Combination sum: {:?}", result);
 }
 
+// 40: /problems/combination-sum-ii/
+fn combination_sum_2() {
+    let candidates: Vec<i32> = vec![10, 1, 2, 7, 6, 1, 5];
+    let target: i32 = 8;
+    let result: Vec<Vec<i32>> = Leetcode::combination_sum_2(candidates, target);
+    println!("Combination sum II: {:?}", result);
+}
+
 fn main() {
     two_sum();
     add_two_numbers();
@@ -379,4 +387,5 @@ fn main() {
     solve_sudoku();
     count_and_say();
     combination_sum();
+    combination_sum_2();
 }

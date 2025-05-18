@@ -787,4 +787,27 @@ impl Leetcode {
         backtrack(&candidates, 0, target, &mut p, &mut res);
         res
     }
+
+    // 40: /problems/combination-sum-ii/
+    pub fn combination_sum_2(candidates: Vec<i32>, target: i32) -> Vec<Vec<i32>> {
+        let mut candidates: Vec<i32> = candidates;
+        candidates.sort_unstable();
+        let mut res: Vec<Vec<i32>> = Vec::new();
+        let mut current_combination: Vec<i32> = Vec::new();
+        fn backtrack(s: usize, c: &[i32], t: i32, p: &mut Vec<i32>, r: &mut Vec<Vec<i32>>) {
+            if t == 0 {
+                r.push(p.clone());
+                return;
+            }
+            if t < 0 { return; }
+            for i in s..c.len() {
+                if i > s && c[i] == c[i - 1] { continue; }
+                p.push(c[i]);
+                backtrack(i + 1, c, t - c[i], p, r);
+                p.pop();
+            }
+        }
+        backtrack(0, &candidates, target, &mut current_combination, &mut res);
+        res
+    }
 }
