@@ -348,6 +348,13 @@ fn combination_sum_2() {
     println!("Combination sum II: {:?}", result);
 }
 
+// 41: /problems/first-missing-positive/
+fn first_missing_positive() {
+    let nums: Vec<i32> = vec![3, 4, -1, 1];
+    let result: i32 = Leetcode::first_missing_positive(nums);
+    println!("First missing positive: {:?}", result);
+}
+
 fn main() {
     two_sum();
     add_two_numbers();
@@ -388,4 +395,5 @@ fn main() {
     count_and_say();
     combination_sum();
     combination_sum_2();
+    first_missing_positive();
 }
