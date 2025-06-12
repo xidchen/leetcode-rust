@@ -826,4 +826,26 @@ impl Leetcode {
         }
         n as i32 + 1
     }
+    
+    // 42: /problems/trapping-rain-water/
+    pub fn trap(height: Vec<i32>) -> i32 {
+        if height.is_empty() { return 0; }
+        let mut left = 0;
+        let mut right = height.len() - 1;
+        let mut left_max = height[left];
+        let mut right_max = height[right];
+        let mut res = 0;
+        while left < right {
+            if left_max < right_max {
+                left += 1;
+                if height[left] > left_max { left_max = height[left]; }
+                res += left_max - height[left];
+            } else {
+                right -= 1;
+                if height[right] > right_max { right_max = height[right]; }
+                res += right_max - height[right];
+            }
+        }
+        res
+    }
 }

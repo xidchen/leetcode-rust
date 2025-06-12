@@ -355,6 +355,13 @@ fn first_missing_positive() {
     println!("First missing positive: {:?}", result);
 }
 
+// 42: /problems/trapping-rain-water/
+fn trap() {
+    let height: Vec<i32> = vec![4, 2, 0, 3, 2, 5];
+    let result: i32 = Leetcode::trap(height);
+    println!("Trapping rain water: {:?}", result);
+}
+
 fn main() {
     two_sum();
     add_two_numbers();
@@ -396,4 +403,5 @@ fn main() {
     combination_sum();
     combination_sum_2();
     first_missing_positive();
+    trap();
 }
