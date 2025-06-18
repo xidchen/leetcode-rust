@@ -848,4 +848,27 @@ impl Leetcode {
         }
         res
     }
+    
+    // 43: /problems/multiply-strings/
+    pub fn multiply(num1: String, num2: String) -> String {
+        if num1 == "0" || num2 == "0" { return "0".to_string(); }
+        let num1_bytes = num1.as_bytes();
+        let num2_bytes = num2.as_bytes();
+        let mut res = vec![0; num1.len() + num2.len()];
+        for i in (0..num1.len()).rev() {
+            for j in (0..num2.len()).rev() {
+                let d1 = (num1_bytes[i] - b'0') as i32;
+                let d2 = (num2_bytes[j] - b'0') as i32;
+                let product = d1 * d2;
+                let pos1 = i + j;
+                let pos2 = i + j + 1;
+                let sum = product + res[pos2];
+                res[pos2] = sum % 10;
+                res[pos1] += sum / 10;
+            }
+        }
+        let mut start = 0;
+        while start < res.len() && res[start] == 0 { start += 1; }
+        res[start..].iter().map(|&d| (d as u8 + b'0') as char).collect()
+    }
 }

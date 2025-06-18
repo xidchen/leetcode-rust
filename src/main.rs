@@ -362,6 +362,14 @@ fn trap() {
     println!("Trapping rain water: {:?}", result);
 }
 
+// 43: /problems/multiply-strings/
+fn multiply() {
+    let num1: String = String::from("123");
+    let num2: String = String::from("456");
+    let result: String = Leetcode::multiply(num1, num2);
+    println!("Multiply strings: {:?}", result);
+}
+
 fn main() {
     two_sum();
     add_two_numbers();
@@ -404,4 +412,5 @@ fn main() {
     combination_sum_2();
     first_missing_positive();
     trap();
+    multiply();
 }
