@@ -874,24 +874,29 @@ impl Leetcode {
 
     // 44: /problems/wildcard-matching/
     pub fn is_match_wildcard(s: String, p: String) -> bool {
-        let s_chars: Vec<char> = s.chars().collect();
-        let p_chars: Vec<char> = p.chars().collect();
-        let s_len = s_chars.len();
-        let p_len = p_chars.len();
-        let mut dp = vec![vec![false; p_len + 1]; s_len + 1];
-        dp[0][0] = true;
-        for j in 1..=p_len {
-            if p_chars[j - 1] == '*' { dp[0][j] = dp[0][j - 1]; }
+        let s_bytes = s.as_bytes();
+        let p_bytes = p.as_bytes();
+        let mut s_idx = 0;
+        let mut p_idx = 0;
+        let mut star_idx = None;
+        let mut match_idx = 0;
+        while s_idx < s_bytes.len() {
+            if p_idx < p_bytes.len() && (
+                p_bytes[p_idx] == b'?' || p_bytes[p_idx] == s_bytes[s_idx]
+            ) {
+                s_idx += 1;
+                p_idx += 1;
+            } else if p_idx < p_bytes.len() && p_bytes[p_idx] == b'*' {
+                star_idx = Some(p_idx);
+                match_idx = s_idx;
+                p_idx += 1;
+            } else if let Some(star_pos) = star_idx {
+                p_idx = star_pos + 1;
+                match_idx += 1;
+                s_idx = match_idx;
+            } else { return false; }
         }
-        for i in 1..=s_len {
-            for j in 1..=p_len {
-                if p_chars[j - 1] == '*' {
-                    dp[i][j] = dp[i][j - 1] || dp[i - 1][j];
-                } else if p_chars[j - 1] == '?' || s_chars[i - 1] == p_chars[j - 1] {
-                    dp[i][j] = dp[i - 1][j - 1];
-                }
-            }
-        }
-        dp[s_len][p_len]
+        while p_idx < p_bytes.len() && p_bytes[p_idx] == b'*' { p_idx += 1; }
+        p_idx == p_bytes.len()
     }
 }
