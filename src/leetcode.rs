@@ -826,7 +826,7 @@ impl Leetcode {
         }
         n as i32 + 1
     }
-    
+
     // 42: /problems/trapping-rain-water/
     pub fn trap(height: Vec<i32>) -> i32 {
         if height.is_empty() { return 0; }
@@ -848,7 +848,7 @@ impl Leetcode {
         }
         res
     }
-    
+
     // 43: /problems/multiply-strings/
     pub fn multiply(num1: String, num2: String) -> String {
         if num1 == "0" || num2 == "0" { return "0".to_string(); }
@@ -870,5 +870,28 @@ impl Leetcode {
         let mut start = 0;
         while start < res.len() && res[start] == 0 { start += 1; }
         res[start..].iter().map(|&d| (d as u8 + b'0') as char).collect()
+    }
+
+    // 44: /problems/wildcard-matching/
+    pub fn is_match_wildcard(s: String, p: String) -> bool {
+        let s_chars: Vec<char> = s.chars().collect();
+        let p_chars: Vec<char> = p.chars().collect();
+        let s_len = s_chars.len();
+        let p_len = p_chars.len();
+        let mut dp = vec![vec![false; p_len + 1]; s_len + 1];
+        dp[0][0] = true;
+        for j in 1..=p_len {
+            if p_chars[j - 1] == '*' { dp[0][j] = dp[0][j - 1]; }
+        }
+        for i in 1..=s_len {
+            for j in 1..=p_len {
+                if p_chars[j - 1] == '*' {
+                    dp[i][j] = dp[i][j - 1] || dp[i - 1][j];
+                } else if p_chars[j - 1] == '?' || s_chars[i - 1] == p_chars[j - 1] {
+                    dp[i][j] = dp[i - 1][j - 1];
+                }
+            }
+        }
+        dp[s_len][p_len]
     }
 }

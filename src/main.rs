@@ -370,6 +370,14 @@ fn multiply() {
     println!("Multiply strings: {:?}", result);
 }
 
+// 44: /problems/wildcard-matching/
+fn is_match_wildcard() {
+    let s: String = String::from("aa");
+    let p: String = String::from("a*");
+    let result: bool = Leetcode::is_match_wildcard(s, p);
+    println!("Wildcard matching: {:?}", result);
+}
+
 fn main() {
     two_sum();
     add_two_numbers();
@@ -413,4 +421,5 @@ fn main() {
     first_missing_positive();
     trap();
     multiply();
+    is_match_wildcard();
 }
