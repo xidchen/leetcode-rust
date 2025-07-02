@@ -378,6 +378,13 @@ fn is_match_wildcard() {
     println!("Wildcard matching: {:?}", result);
 }
 
+// 45: /problems/jump-game-ii/
+fn jump() {
+    let nums: Vec<i32> = vec![2, 3, 1, 1, 4];
+    let result: i32 = Leetcode::jump(nums);
+    println!("Jump game II: {:?}", result);
+}
+
 fn main() {
     two_sum();
     add_two_numbers();
@@ -422,4 +429,5 @@ fn main() {
     trap();
     multiply();
     is_match_wildcard();
+    jump();
 }
