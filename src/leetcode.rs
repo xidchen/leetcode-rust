@@ -917,4 +917,23 @@ impl Leetcode {
         }
         jumps
     }
+
+    // 46: /problems/permutations/
+    pub fn permute(nums: Vec<i32>) -> Vec<Vec<i32>> {
+        let mut res = Vec::new();
+        let mut nums = nums;
+        fn backtrack(nums: &mut Vec<i32>, start: usize, r: &mut Vec<Vec<i32>>) {
+            if start == nums.len() {
+                r.push(nums.clone());
+            } else {
+                for i in start..nums.len() {
+                    nums.swap(start, i);
+                    backtrack(nums, start + 1, r);
+                    nums.swap(start, i);
+                }
+            }
+        }
+        backtrack(&mut nums, 0, &mut res);
+        res
+    }
 }

@@ -385,6 +385,13 @@ fn jump() {
     println!("Jump game II: {:?}", result);
 }
 
+// 46: /problems/permutations/
+fn permute() {
+    let nums: Vec<i32> = vec![1, 2, 3];
+    let result: Vec<Vec<i32>> = Leetcode::permute(nums);
+    println!("Permutations: {:?}", result);
+}
+
 fn main() {
     two_sum();
     add_two_numbers();
@@ -430,4 +437,5 @@ fn main() {
     multiply();
     is_match_wildcard();
     jump();
+    permute();
 }
