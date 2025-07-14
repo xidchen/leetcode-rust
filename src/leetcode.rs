@@ -925,12 +925,12 @@ impl Leetcode {
         fn backtrack(nums: &mut Vec<i32>, start: usize, r: &mut Vec<Vec<i32>>) {
             if start == nums.len() {
                 r.push(nums.clone());
-            } else {
-                for i in start..nums.len() {
-                    nums.swap(start, i);
-                    backtrack(nums, start + 1, r);
-                    nums.swap(start, i);
-                }
+                return;
+            }
+            for i in start..nums.len() {
+                nums.swap(start, i);
+                backtrack(nums, start + 1, r);
+                nums.swap(start, i);
             }
         }
         backtrack(&mut nums, 0, &mut res);
