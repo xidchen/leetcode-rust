@@ -936,4 +936,26 @@ impl Leetcode {
         backtrack(&mut nums, 0, &mut res);
         res
     }
+
+    // 47: /problems/permutations-ii/
+    pub fn permute_unique(nums: Vec<i32>) -> Vec<Vec<i32>> {
+        let mut res = Vec::new();
+        let mut nums = nums;
+        fn backtrack(nums: &mut Vec<i32>, start: usize, r: &mut Vec<Vec<i32>>) {
+            let mut used = std::collections::HashSet::new();
+            if start == nums.len() {
+                r.push(nums.clone());
+                return;
+            }
+            for i in start..nums.len() {
+                if used.contains(&nums[i]) { continue; }
+                used.insert(nums[i]);
+                nums.swap(start, i);
+                backtrack(nums, start + 1, r);
+                nums.swap(start, i);
+            }
+        }
+        backtrack(&mut nums, 0, &mut res);
+        res
+    }
 }

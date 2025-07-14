@@ -392,6 +392,13 @@ fn permute() {
     println!("Permutations: {:?}", result);
 }
 
+// 47: /problems/permutations-ii/
+fn permute_unique() {
+    let nums: Vec<i32> = vec![1, 1, 2];
+    let result: Vec<Vec<i32>> = Leetcode::permute_unique(nums);
+    println!("Permutations II: {:?}", result);
+}
+
 fn main() {
     two_sum();
     add_two_numbers();
@@ -438,4 +445,5 @@ fn main() {
     is_match_wildcard();
     jump();
     permute();
+    permute_unique();
 }
