@@ -399,6 +399,18 @@ fn permute_unique() {
     println!("Permutations II: {:?}", result);
 }
 
+// 48: /problems/rotate-image/
+fn rotate() {
+    let mut matrix: Vec<Vec<i32>> = vec![
+        vec![5, 1, 9, 11],
+        vec![2, 4, 8, 10],
+        vec![13, 3, 6, 7],
+        vec![15, 14, 12, 16]
+    ];
+    Leetcode::rotate(&mut matrix);
+    println!("Rotate image: {:?}", matrix);
+}
+
 fn main() {
     two_sum();
     add_two_numbers();
@@ -446,4 +458,5 @@ fn main() {
     jump();
     permute();
     permute_unique();
+    rotate();
 }
