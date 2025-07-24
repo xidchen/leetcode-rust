@@ -971,4 +971,20 @@ impl Leetcode {
         }
         for i in 0..n { matrix[i].reverse(); }
     }
+
+    // 49: /problems/group-anagrams/
+    pub fn group_anagrams(strs: Vec<String>) -> Vec<Vec<String>> {
+        let mut res = std::collections::HashMap::new();
+        for s in strs {
+            let mut key = vec![0; 26];
+            for c in s.chars() {
+                key[c as usize - 'a' as usize] += 1;
+            }
+            let key = key.iter().map(|&i| i as u8).collect::<Vec<u8>>();
+            let key = String::from_utf8(key).unwrap();
+            let entry = res.entry(key).or_insert(Vec::new());
+            entry.push(s);
+        }
+        res.into_iter().map(|(_, v)| v).collect()
+    }
 }

@@ -411,6 +411,20 @@ fn rotate() {
     println!("Rotate image: {:?}", matrix);
 }
 
+// 49: /problems/group-anagrams/
+fn group_anagrams() {
+    let strs: Vec<String> = vec![
+        String::from("eat"),
+        String::from("tea"),
+        String::from("tan"),
+        String::from("ate"),
+        String::from("nat"),
+        String::from("bat")
+    ];
+    let result: Vec<Vec<String>> = Leetcode::group_anagrams(strs);
+    println!("Group anagrams: {:?}", result);
+}
+
 fn main() {
     two_sum();
     add_two_numbers();
@@ -459,4 +473,5 @@ fn main() {
     permute();
     permute_unique();
     rotate();
+    group_anagrams();
 }
