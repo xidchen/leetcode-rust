@@ -425,6 +425,14 @@ fn group_anagrams() {
     println!("Group anagrams: {:?}", result);
 }
 
+// 50: /problems/powx-n/
+fn my_pow() {
+    let x: f64 = 2.0;
+    let n: i32 = 10;
+    let result: f64 = Leetcode::my_pow(x, n);
+    println!("Powx n: {:?}", result);
+}
+
 fn main() {
     two_sum();
     add_two_numbers();
@@ -474,4 +482,5 @@ fn main() {
     permute_unique();
     rotate();
     group_anagrams();
+    my_pow();
 }
