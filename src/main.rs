@@ -114,7 +114,11 @@ fn roman_to_int() {
 
 // 14: /problems/longest-common-prefix/
 fn longest_common_prefix() {
-    let strs: Vec<String> = vec!["flower".to_string(), "flow".to_string(), "flight".to_string()];
+    let strs: Vec<String> = vec![
+        "flower".to_string(),
+        "flow".to_string(),
+        "flight".to_string(),
+    ];
     let result: String = Leetcode::longest_common_prefix(strs);
     println!("Longest common prefix: {:?}", result);
 }
@@ -143,7 +147,7 @@ fn letter_combinations() {
 
 // 18: /problems/4sum/
 fn four_sum() {
-    let nums: Vec<i32> = vec![0,0,0,1000000000,1000000000,1000000000,1000000000];
+    let nums: Vec<i32> = vec![0, 0, 0, 1000000000, 1000000000, 1000000000, 1000000000];
     let target: i32 = 1000000000;
     let result: Vec<Vec<i32>> = Leetcode::four_sum(nums, target);
     println!("Four sum: {:?}", result);
@@ -230,7 +234,10 @@ fn str_str() {
     let haystack: String = String::from("sadness");
     let needle: String = String::from("sad");
     let result: i32 = Leetcode::str_str(haystack, needle);
-    println!("Find the index of the first occurrence in a string: {:?}", result);
+    println!(
+        "Find the index of the first occurrence in a string: {:?}",
+        result
+    );
 }
 
 // 29: /problems/divide-two-integers/
@@ -276,7 +283,10 @@ fn search_range() {
     let nums: Vec<i32> = vec![5, 7, 7, 8, 8, 10];
     let target: i32 = 8;
     let result: Vec<i32> = Leetcode::search_range(nums, target);
-    println!("Find first and last position of element in sorted array: {:?}", result);
+    println!(
+        "Find first and last position of element in sorted array: {:?}",
+        result
+    );
 }
 
 // 35: /problems/search-insert-position/
@@ -298,7 +308,7 @@ fn is_valid_sudoku() {
         vec!['7', '.', '.', '.', '2', '.', '.', '.', '6'],
         vec!['.', '6', '.', '.', '.', '.', '2', '8', '.'],
         vec!['.', '.', '.', '4', '1', '9', '.', '.', '5'],
-        vec!['.', '.', '.', '.', '8', '.', '.', '7', '9']
+        vec!['.', '.', '.', '.', '8', '.', '.', '7', '9'],
     ];
     let result: bool = Leetcode::is_valid_sudoku(board);
     println!("Valid sudoku: {:?}", result);
@@ -405,7 +415,7 @@ fn rotate() {
         vec![5, 1, 9, 11],
         vec![2, 4, 8, 10],
         vec![13, 3, 6, 7],
-        vec![15, 14, 12, 16]
+        vec![15, 14, 12, 16],
     ];
     Leetcode::rotate(&mut matrix);
     println!("Rotate image: {:?}", matrix);
@@ -419,7 +429,7 @@ fn group_anagrams() {
         String::from("tan"),
         String::from("ate"),
         String::from("nat"),
-        String::from("bat")
+        String::from("bat"),
     ];
     let result: Vec<Vec<String>> = Leetcode::group_anagrams(strs);
     println!("Group anagrams: {:?}", result);

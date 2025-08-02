@@ -25,7 +25,6 @@ impl Eq for ListNodeWrapper {}
 pub struct Leetcode;
 
 impl Leetcode {
-
     // 1: /problems/two-sum/
     pub fn two_sum(nums: Vec<i32>, target: i32) -> Vec<i32> {
         let mut dic: std::collections::HashMap<i32, usize> = std::collections::HashMap::new();
@@ -41,7 +40,7 @@ impl Leetcode {
     // 2: /problems/add-two-numbers/
     pub fn add_two_numbers(
         l1: Option<Box<ListNode>>,
-        l2: Option<Box<ListNode>>
+        l2: Option<Box<ListNode>>,
     ) -> Option<Box<ListNode>> {
         let mut l1: Option<Box<ListNode>> = l1;
         let mut l2: Option<Box<ListNode>> = l2;
@@ -71,7 +70,9 @@ impl Leetcode {
         let mut longest: i32 = 0;
         for (i, c) in s.chars().enumerate() {
             if let Some(&last_index) = last_seen.get(&c) {
-                if last_index >= start { start = last_index + 1; }
+                if last_index >= start {
+                    start = last_index + 1;
+                }
             }
             longest = longest.max(i as i32 - start + 1);
             last_seen.insert(c, i as i32);
@@ -89,10 +90,14 @@ impl Leetcode {
         for i in 0..s.len() {
             let odd = if i as i32 - ml - 1 >= 0 {
                 &s[i - ml as usize - 1..=i]
-            } else { "" };
+            } else {
+                ""
+            };
             let even = if i as i32 - ml >= 0 {
                 &s[i - ml as usize..=i]
-            } else { "" };
+            } else {
+                ""
+            };
             if !odd.is_empty() && odd.chars().eq(odd.chars().rev()) {
                 start = i as i32 - ml - 1;
                 ml += 2;
@@ -143,7 +148,9 @@ impl Leetcode {
             y = y * 10 + (x % 10) as i64;
             x /= 10;
         }
-        if y > i32::MAX as i64 { return 0; }
+        if y > i32::MAX as i64 {
+            return 0;
+        }
         let result: i32 = if negative { -y as i32 } else { y as i32 };
         result
     }
@@ -151,7 +158,9 @@ impl Leetcode {
     // 8: /problems/string-to-integer-atoi/
     pub fn my_atoi(s: String) -> i32 {
         let s = s.trim_start();
-        if s.is_empty() { return 0; }
+        if s.is_empty() {
+            return 0;
+        }
         let mut chars = s.chars();
         let mut sign = 1;
         if let Some(c) = chars.next() {
@@ -159,15 +168,23 @@ impl Leetcode {
                 sign = if c == '-' { -1 } else { 1 };
             } else if c.is_ascii_digit() {
                 chars = s.chars();
-            } else { return 0; }
+            } else {
+                return 0;
+            }
         }
         let mut res: i64 = 0;
         for c in chars {
             if c.is_ascii_digit() {
                 res = res * 10 + (c as i64 - '0' as i64);
-                if res * sign > i32::MAX as i64 { return i32::MAX; }
-                if res * sign < i32::MIN as i64 { return i32::MIN; }
-            } else { break; }
+                if res * sign > i32::MAX as i64 {
+                    return i32::MAX;
+                }
+                if res * sign < i32::MIN as i64 {
+                    return i32::MIN;
+                }
+            } else {
+                break;
+            }
         }
         (res * sign) as i32
     }
@@ -186,8 +203,8 @@ impl Leetcode {
         dp[s_chars.len()][p_chars.len()] = true;
         for i in (0..=s_chars.len()).rev() {
             for j in (0..p_chars.len()).rev() {
-                let first_match = i < s_chars.len() &&
-                    (p_chars[j] == s_chars[i] || p_chars[j] == '.');
+                let first_match =
+                    i < s_chars.len() && (p_chars[j] == s_chars[i] || p_chars[j] == '.');
                 if j + 1 < p_chars.len() && p_chars[j + 1] == '*' {
                     dp[i][j] = dp[i][j + 2] || (first_match && dp[i + 1][j]);
                 } else {
@@ -205,9 +222,14 @@ impl Leetcode {
         let mut j = height.len() - 1;
         while i < j {
             max_area = std::cmp::max(
-                max_area, std::cmp::min(height[i], height[j]) * (j - i) as i32
+                max_area,
+                std::cmp::min(height[i], height[j]) * (j - i) as i32,
             );
-            if height[i] < height[j] { i += 1; } else { j -= 1; }
+            if height[i] < height[j] {
+                i += 1;
+            } else {
+                j -= 1;
+            }
         }
         max_area
     }
@@ -215,9 +237,18 @@ impl Leetcode {
     // 12: /problems/integer-to-roman/
     pub fn int_to_roman(num: i32) -> String {
         let mapping = vec![
-            (1000, "M"), (900, "CM"), (500, "D"), (400, "CD"),
-            (100, "C"), (90, "XC"), (50, "L"), (40, "XL"),
-            (10, "X"), (9, "IX"), (5, "V"), (4, "IV"),
+            (1000, "M"),
+            (900, "CM"),
+            (500, "D"),
+            (400, "CD"),
+            (100, "C"),
+            (90, "XC"),
+            (50, "L"),
+            (40, "XL"),
+            (10, "X"),
+            (9, "IX"),
+            (5, "V"),
+            (4, "IV"),
             (1, "I"),
         ];
         let mut romans = String::new();
@@ -248,10 +279,10 @@ impl Leetcode {
                 Some(&value) if value >= prev_int => {
                     prev_int = value;
                     integer += value;
-                },
+                }
                 Some(&value) => {
                     integer -= value;
-                },
+                }
                 _ => (),
             }
         }
@@ -260,13 +291,21 @@ impl Leetcode {
 
     // 14: /problems/longest-common-prefix/
     pub fn longest_common_prefix(strs: Vec<String>) -> String {
-        if strs.is_empty() { return String::new(); }
-        if strs.len() == 1 { return strs[0].clone(); }
+        if strs.is_empty() {
+            return String::new();
+        }
+        if strs.len() == 1 {
+            return strs[0].clone();
+        }
         let mut strs = strs;
         strs.sort();
         let mut result = String::new();
         for (a, b) in strs[0].chars().zip(strs.last().unwrap().chars()) {
-            if a == b { result.push(a); } else { break; }
+            if a == b {
+                result.push(a);
+            } else {
+                break;
+            }
         }
         result
     }
@@ -275,12 +314,16 @@ impl Leetcode {
     pub fn three_sum(nums: Vec<i32>) -> Vec<Vec<i32>> {
         let mut dic: std::collections::HashMap<i32, usize> = std::collections::HashMap::new();
         let mut res: Vec<Vec<i32>> = Vec::new();
-        for &n in &nums { *dic.entry(n).or_insert(0) += 1; }
+        for &n in &nums {
+            *dic.entry(n).or_insert(0) += 1;
+        }
         let mut sorted_nums: Vec<i32> = dic.keys().cloned().collect();
         sorted_nums.sort_unstable();
         for (i, &x) in sorted_nums.iter().enumerate() {
             if x == 0 {
-                if *dic.get(&x).unwrap_or(&0) > 2 { res.push(vec![0, 0, 0]); }
+                if *dic.get(&x).unwrap_or(&0) > 2 {
+                    res.push(vec![0, 0, 0]);
+                }
             } else if *dic.get(&x).unwrap_or(&0) > 1 && dic.contains_key(&(-2 * x)) {
                 res.push(vec![x, x, -2 * x]);
             }
@@ -288,8 +331,12 @@ impl Leetcode {
                 for j in (i + 1)..sorted_nums.len() {
                     let y = sorted_nums[j];
                     let z = -x - y;
-                    if z <= y { break; }
-                    if dic.contains_key(&z) && z != y { res.push(vec![x, y, z]); }
+                    if z <= y {
+                        break;
+                    }
+                    if dic.contains_key(&z) && z != y {
+                        res.push(vec![x, y, z]);
+                    }
                 }
             }
         }
@@ -304,14 +351,26 @@ impl Leetcode {
         let mut res = nums[0] + nums[1] + nums[2];
         for i in 0..n - 2 {
             let (mut j, mut k) = (i + 1, n - 1);
-            if nums[i] + nums[j] + nums[j + 1] >= target { k = j + 1; }
-            if nums[i] + nums[k - 1] + nums[k] <= target { j = k - 1; }
+            if nums[i] + nums[j] + nums[j + 1] >= target {
+                k = j + 1;
+            }
+            if nums[i] + nums[k - 1] + nums[k] <= target {
+                j = k - 1;
+            }
             while j < k {
                 let s = nums[i] + nums[j] + nums[k];
-                if (target - s).abs() < (target - res).abs() { res = s; }
-                if s == target { return res; }
-                if s < target { j += 1; }
-                if s > target { k -= 1; }
+                if (target - s).abs() < (target - res).abs() {
+                    res = s;
+                }
+                if s == target {
+                    return res;
+                }
+                if s < target {
+                    j += 1;
+                }
+                if s > target {
+                    k -= 1;
+                }
             }
         }
         res
@@ -332,7 +391,10 @@ impl Leetcode {
             ('7', vec!['p', 'q', 'r', 's']),
             ('8', vec!['t', 'u', 'v']),
             ('9', vec!['w', 'x', 'y', 'z']),
-        ].iter().cloned().collect();
+        ]
+        .iter()
+        .cloned()
+        .collect();
         results.push(String::new());
         for digit in digits.chars() {
             let mut temp: Vec<String> = Vec::new();
@@ -350,8 +412,12 @@ impl Leetcode {
     pub fn four_sum(nums: Vec<i32>, target: i32) -> Vec<Vec<i32>> {
         fn k_sum(n: Vec<i64>, t: i64, k: i64) -> Vec<Vec<i32>> {
             let mut res: Vec<Vec<i32>> = Vec::new();
-            if n.len() < k as usize || t < n[0] * k || n[n.len() - 1] * k < t { return res; }
-            if k == 2 { return two_sum(n, t); }
+            if n.len() < k as usize || t < n[0] * k || n[n.len() - 1] * k < t {
+                return res;
+            }
+            if k == 2 {
+                return two_sum(n, t);
+            }
             for i in 0..n.len() {
                 if i == 0 || n[i - 1] != n[i] {
                     for mut set in k_sum(n[i + 1..].to_vec(), t - n[i], k - 1) {
@@ -368,9 +434,11 @@ impl Leetcode {
             let (mut lo, mut hi) = (0, n.len() - 1);
             while lo < hi {
                 let sum: i64 = n[lo] + n[hi];
-                if sum < t || (0 < lo && n[lo] == n[lo - 1]) { lo += 1; }
-                else if t < sum || (hi < n.len() - 1 && n[hi] == n[hi + 1]) { hi -= 1; }
-                else {
+                if sum < t || (0 < lo && n[lo] == n[lo - 1]) {
+                    lo += 1;
+                } else if t < sum || (hi < n.len() - 1 && n[hi] == n[hi + 1]) {
+                    hi -= 1;
+                } else {
                     res.push(vec![n[lo] as i32, n[hi] as i32]);
                     lo += 1;
                     hi -= 1;
@@ -408,13 +476,19 @@ impl Leetcode {
 
     // 20: /problems/valid-parentheses/
     pub fn is_valid(s: String) -> bool {
-        let d: std::collections::HashMap<char, char> = [
-            ('(', ')'), ('[', ']'), ('{', '}')
-        ].iter().cloned().collect();
+        let d: std::collections::HashMap<char, char> = [('(', ')'), ('[', ']'), ('{', '}')]
+            .iter()
+            .cloned()
+            .collect();
         let mut stack: Vec<char> = Vec::new();
         for c in s.chars() {
-            if d.contains_key(&c) { stack.push(c); }
-            else { if stack.is_empty() || d[&stack.pop().unwrap()] != c { return false; } }
+            if d.contains_key(&c) {
+                stack.push(c);
+            } else {
+                if stack.is_empty() || d[&stack.pop().unwrap()] != c {
+                    return false;
+                }
+            }
         }
         stack.is_empty()
     }
@@ -426,10 +500,7 @@ impl Leetcode {
     ) -> Option<Box<ListNode>> {
         let mut dummy: Box<ListNode> = Box::new(ListNode::new(0));
         let mut prev: &mut Box<ListNode> = &mut dummy;
-        while let (
-            Some(node1),
-            Some(node2)
-        ) = (l1.as_mut(), l2.as_mut()) {
+        while let (Some(node1), Some(node2)) = (l1.as_mut(), l2.as_mut()) {
             if node1.val < node2.val {
                 let next: Option<Box<ListNode>> = node1.next.take();
                 prev.next = l1;
@@ -452,8 +523,12 @@ impl Leetcode {
                 res.push(s);
                 return;
             }
-            if left < n { backtrack(res, s.clone() + "(", left + 1, right, n); }
-            if right < left { backtrack(res, s.clone() + ")", left, right + 1, n); }
+            if left < n {
+                backtrack(res, s.clone() + "(", left + 1, right, n);
+            }
+            if right < left {
+                backtrack(res, s.clone() + ")", left, right + 1, n);
+            }
         }
 
         let mut result = Vec::new();
@@ -464,11 +539,15 @@ impl Leetcode {
     // 23: /problems/merge-k-sorted-lists/
     pub fn merge_k_lists(lists: Vec<Option<Box<ListNode>>>) -> Option<Box<ListNode>> {
         let mut heap = std::collections::BinaryHeap::new();
-        for list in lists.into_iter().flatten() { heap.push(ListNodeWrapper(list)); }
+        for list in lists.into_iter().flatten() {
+            heap.push(ListNodeWrapper(list));
+        }
         let mut dummy = ListNode::new(0);
         let mut prev = &mut dummy;
         while let Some(ListNodeWrapper(mut node)) = heap.pop() {
-            if let Some(next) = node.next.take() { heap.push(ListNodeWrapper(next)); }
+            if let Some(next) = node.next.take() {
+                heap.push(ListNodeWrapper(next));
+            }
             prev.next = Some(node);
             prev = prev.next.as_mut()?;
         }
@@ -493,10 +572,14 @@ impl Leetcode {
 
     // 25: /problems/reverse-nodes-in-k-group/
     pub fn reverse_k_group(head: Option<Box<ListNode>>, k: i32) -> Option<Box<ListNode>> {
-        if k < 2 { return head; }
+        if k < 2 {
+            return head;
+        }
         let mut node = &head;
         for _ in 0..k {
-            if node.is_none() { return head; }
+            if node.is_none() {
+                return head;
+            }
             node = &node.as_ref().unwrap().next;
         }
         let remainder = Self::reverse_k_group(node.clone(), k);
@@ -539,13 +622,15 @@ impl Leetcode {
     pub fn str_str(haystack: String, needle: String) -> i32 {
         match haystack.find(&needle) {
             None => -1,
-            Some(index) => index as i32
+            Some(index) => index as i32,
         }
     }
 
     // 29: /problems/divide-two-integers/
     pub fn divide(dividend: i32, divisor: i32) -> i32 {
-        if dividend == i32::MIN && divisor == -1 { return i32::MAX; }
+        if dividend == i32::MIN && divisor == -1 {
+            return i32::MAX;
+        }
         let diff_sign = (dividend < 0) ^ (divisor < 0);
         let mut dividend = dividend as i64;
         let mut divisor = divisor as i64;
@@ -562,19 +647,25 @@ impl Leetcode {
             dividend -= temp;
             res += multiple;
         }
-        if diff_sign { res = -res; }
+        if diff_sign {
+            res = -res;
+        }
         res.max(i32::MIN).min(i32::MAX)
     }
 
     // 30: /problems/substring-with-concatenation-of-all-words/
     pub fn find_substring(s: String, words: Vec<String>) -> Vec<i32> {
         let mut res = Vec::new();
-        if words.is_empty() || s.len() < words.len() * words[0].len() { return res; }
+        if words.is_empty() || s.len() < words.len() * words[0].len() {
+            return res;
+        }
         let wc = words.len();
         let wl = words[0].len();
         let sl = s.len();
         let mut wd = std::collections::HashMap::new();
-        for w in words.iter() { *wd.entry(w).or_insert(0) += 1; }
+        for w in words.iter() {
+            *wd.entry(w).or_insert(0) += 1;
+        }
         for i in 0..wl {
             let mut start = i;
             let mut cnt = 0;
@@ -612,10 +703,14 @@ impl Leetcode {
     // 31: /problems/next-permutation/
     pub fn next_permutation(nums: &mut Vec<i32>) {
         let mut i = nums.len() as isize - 2;
-        while i >= 0 && nums[i as usize] >= nums[(i + 1) as usize] { i -= 1; }
+        while i >= 0 && nums[i as usize] >= nums[(i + 1) as usize] {
+            i -= 1;
+        }
         if i >= 0 {
             let mut j = nums.len() as isize - 1;
-            while nums[j as usize] <= nums[i as usize] { j -= 1; }
+            while nums[j as usize] <= nums[i as usize] {
+                j -= 1;
+            }
             nums.swap(i as usize, j as usize);
         }
         nums[(i + 1) as usize..].reverse();
@@ -626,11 +721,15 @@ impl Leetcode {
         let mut max_length = 0;
         let mut stack = vec![-1];
         for (i, c) in s.chars().enumerate() {
-            if c == '(' { stack.push(i as i32); }
-            else {
+            if c == '(' {
+                stack.push(i as i32);
+            } else {
                 stack.pop();
-                if stack.is_empty() { stack.push(i as i32); }
-                else { max_length = max_length.max(i as i32 - stack.last().unwrap()); }
+                if stack.is_empty() {
+                    stack.push(i as i32);
+                } else {
+                    max_length = max_length.max(i as i32 - stack.last().unwrap());
+                }
             }
         }
         max_length
@@ -642,14 +741,16 @@ impl Leetcode {
         let mut right = nums.len() - 1;
         while left <= right {
             let mid = (left + right) / 2;
-            if nums[mid] == target { return mid as i32; }
+            if nums[mid] == target {
+                return mid as i32;
+            }
             if nums[left] <= nums[mid] {
                 if nums[left] <= target && target < nums[mid] {
                     right = mid - 1;
                 } else {
                     left = mid + 1;
                 }
-            } else { 
+            } else {
                 if nums[mid] < target && target <= nums[right] {
                     left = mid + 1;
                 } else {
@@ -667,26 +768,37 @@ impl Leetcode {
             let mut right = right;
             while left <= right {
                 let mid = (left + right) / 2;
-                if tgt > nums[mid as usize] as f64 { left = mid + 1; }
-                else { right = mid - 1; }
+                if tgt > nums[mid as usize] as f64 {
+                    left = mid + 1;
+                } else {
+                    right = mid - 1;
+                }
             }
             left
         }
         let lower = binary(&nums, target as f64 - 0.5, 0, nums.len() as i32 - 1);
         let upper = binary(&nums, target as f64 + 0.5, 0, nums.len() as i32 - 1);
-        if lower == upper { vec![-1, -1] }
-        else { vec![lower, upper - 1]}
+        if lower == upper {
+            vec![-1, -1]
+        } else {
+            vec![lower, upper - 1]
+        }
     }
 
     // 35: /problems/search-insert-position/
     pub fn search_insert(nums: Vec<i32>, target: i32) -> i32 {
         let mut left = 0;
-        let mut right = nums.len() as i32  - 1;
+        let mut right = nums.len() as i32 - 1;
         while left <= right {
             let mid = (left + right) / 2;
-            if nums[mid as usize] == target { return mid; }
-            if nums[mid as usize] < target { left = mid + 1; }
-            else { right = mid - 1; }
+            if nums[mid as usize] == target {
+                return mid;
+            }
+            if nums[mid as usize] < target {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
         }
         left
     }
@@ -699,11 +811,16 @@ impl Leetcode {
         for r in 0..9 {
             for c in 0..9 {
                 let digit = board[r][c];
-                if digit == '.' { continue; }
+                if digit == '.' {
+                    continue;
+                }
                 let box_index = r / 3 * 3 + c / 3;
-                if rows[r].contains(&digit) 
-                    || cols[c].contains(&digit) 
-                    || boxes[box_index].contains(&digit) { return false; }
+                if rows[r].contains(&digit)
+                    || cols[c].contains(&digit)
+                    || boxes[box_index].contains(&digit)
+                {
+                    return false;
+                }
                 rows[r].push(digit);
                 cols[c].push(digit);
                 boxes[box_index].push(digit);
@@ -711,7 +828,7 @@ impl Leetcode {
         }
         true
     }
-    
+
     // 37: /problems/sudoku-solver/
     pub fn solve_sudoku(board: &mut Vec<Vec<char>>) {
         fn solve(board: &mut Vec<Vec<char>>) -> bool {
@@ -721,7 +838,9 @@ impl Leetcode {
                         for digit in '1'..='9' {
                             if is_valid(board, r, c, digit) {
                                 board[r][c] = digit;
-                                if solve(board) { return true; }
+                                if solve(board) {
+                                    return true;
+                                }
                                 board[r][c] = '.';
                             }
                         }
@@ -733,13 +852,23 @@ impl Leetcode {
         }
         fn is_valid(board: &Vec<Vec<char>>, row: usize, col: usize, digit: char) -> bool {
             // Check row
-            for c in 0..9 { if board[row][c] == digit { return false; } }
-            for r in 0..9 { if board[r][col] == digit { return false; } }
+            for c in 0..9 {
+                if board[row][c] == digit {
+                    return false;
+                }
+            }
+            for r in 0..9 {
+                if board[r][col] == digit {
+                    return false;
+                }
+            }
             let box_row = (row / 3) * 3;
             let box_col = (col / 3) * 3;
             for r in box_row..box_row + 3 {
                 for c in box_col..box_col + 3 {
-                    if board[r][c] == digit { return false; }
+                    if board[r][c] == digit {
+                        return false;
+                    }
                 }
             }
             true
@@ -774,12 +903,18 @@ impl Leetcode {
                 r.push(p.clone());
                 return;
             }
-            if nxt == nums.len() { return; }
+            if nxt == nums.len() {
+                return;
+            }
             let mut i: i32 = 0;
             while t - i * nums[nxt] >= 0 {
-                for _ in 0..i { p.push(nums[nxt]); }
+                for _ in 0..i {
+                    p.push(nums[nxt]);
+                }
                 backtrack(nums, nxt + 1, t - i * nums[nxt], p, r);
-                for _ in 0..i { p.pop(); }
+                for _ in 0..i {
+                    p.pop();
+                }
                 i += 1;
             }
         }
@@ -799,9 +934,13 @@ impl Leetcode {
                 r.push(p.clone());
                 return;
             }
-            if t < 0 { return; }
+            if t < 0 {
+                return;
+            }
             for i in s..c.len() {
-                if i > s && c[i] == c[i - 1] { continue; }
+                if i > s && c[i] == c[i - 1] {
+                    continue;
+                }
                 p.push(c[i]);
                 backtrack(i + 1, c, t - c[i], p, r);
                 p.pop();
@@ -822,14 +961,18 @@ impl Leetcode {
             }
         }
         for i in 0..n {
-            if nums[i] != i as i32 + 1 { return i as i32 + 1; }
+            if nums[i] != i as i32 + 1 {
+                return i as i32 + 1;
+            }
         }
         n as i32 + 1
     }
 
     // 42: /problems/trapping-rain-water/
     pub fn trap(height: Vec<i32>) -> i32 {
-        if height.is_empty() { return 0; }
+        if height.is_empty() {
+            return 0;
+        }
         let mut left = 0;
         let mut right = height.len() - 1;
         let mut left_max = height[left];
@@ -838,11 +981,15 @@ impl Leetcode {
         while left < right {
             if left_max < right_max {
                 left += 1;
-                if height[left] > left_max { left_max = height[left]; }
+                if height[left] > left_max {
+                    left_max = height[left];
+                }
                 res += left_max - height[left];
             } else {
                 right -= 1;
-                if height[right] > right_max { right_max = height[right]; }
+                if height[right] > right_max {
+                    right_max = height[right];
+                }
                 res += right_max - height[right];
             }
         }
@@ -851,7 +998,9 @@ impl Leetcode {
 
     // 43: /problems/multiply-strings/
     pub fn multiply(num1: String, num2: String) -> String {
-        if num1 == "0" || num2 == "0" { return "0".to_string(); }
+        if num1 == "0" || num2 == "0" {
+            return "0".to_string();
+        }
         let num1_bytes = num1.as_bytes();
         let num2_bytes = num2.as_bytes();
         let mut res = vec![0; num1.len() + num2.len()];
@@ -868,8 +1017,13 @@ impl Leetcode {
             }
         }
         let mut start = 0;
-        while start < res.len() && res[start] == 0 { start += 1; }
-        res[start..].iter().map(|&d| (d as u8 + b'0') as char).collect()
+        while start < res.len() && res[start] == 0 {
+            start += 1;
+        }
+        res[start..]
+            .iter()
+            .map(|&d| (d as u8 + b'0') as char)
+            .collect()
     }
 
     // 44: /problems/wildcard-matching/
@@ -881,9 +1035,8 @@ impl Leetcode {
         let mut star_idx = None;
         let mut match_idx = 0;
         while s_idx < s_bytes.len() {
-            if p_idx < p_bytes.len() && (
-                p_bytes[p_idx] == b'?' || p_bytes[p_idx] == s_bytes[s_idx]
-            ) {
+            if p_idx < p_bytes.len() && (p_bytes[p_idx] == b'?' || p_bytes[p_idx] == s_bytes[s_idx])
+            {
                 s_idx += 1;
                 p_idx += 1;
             } else if p_idx < p_bytes.len() && p_bytes[p_idx] == b'*' {
@@ -894,16 +1047,22 @@ impl Leetcode {
                 p_idx = star_pos + 1;
                 match_idx += 1;
                 s_idx = match_idx;
-            } else { return false; }
+            } else {
+                return false;
+            }
         }
-        while p_idx < p_bytes.len() && p_bytes[p_idx] == b'*' { p_idx += 1; }
+        while p_idx < p_bytes.len() && p_bytes[p_idx] == b'*' {
+            p_idx += 1;
+        }
         p_idx == p_bytes.len()
     }
 
     // 45: /problems/jump-game-ii/
     pub fn jump(nums: Vec<i32>) -> i32 {
         let n = nums.len();
-        if n <= 1 { return 0; }
+        if n <= 1 {
+            return 0;
+        }
         let mut jumps = 0;
         let mut current_end = 0;
         let mut farthest = 0;
@@ -912,7 +1071,9 @@ impl Leetcode {
             if i == current_end {
                 jumps += 1;
                 current_end = farthest;
-                if current_end >= n - 1 { break; }
+                if current_end >= n - 1 {
+                    break;
+                }
             }
         }
         jumps
@@ -948,7 +1109,9 @@ impl Leetcode {
                 return;
             }
             for i in start..nums.len() {
-                if used.contains(&nums[i]) { continue; }
+                if used.contains(&nums[i]) {
+                    continue;
+                }
                 used.insert(nums[i]);
                 nums.swap(start, i);
                 backtrack(nums, start + 1, r);
@@ -969,7 +1132,9 @@ impl Leetcode {
                 matrix[j][i] = temp;
             }
         }
-        for i in 0..n { matrix[i].reverse(); }
+        for i in 0..n {
+            matrix[i].reverse();
+        }
     }
 
     // 49: /problems/group-anagrams/
