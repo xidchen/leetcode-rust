@@ -440,7 +440,7 @@ fn my_pow() {
     let x: f64 = 2.0;
     let n: i32 = 10;
     let result: f64 = Leetcode::my_pow(x, n);
-    println!("Powx n: {:?}", result);
+    println!("Pow({x}, {n}): {:?}", result);
 }
 
 fn main() {
