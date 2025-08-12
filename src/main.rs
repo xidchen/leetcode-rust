@@ -443,6 +443,13 @@ fn my_pow() {
     println!("Pow({x}, {n}): {:?}", result);
 }
 
+// 51: /problems/n-queens/
+fn solve_n_queens() {
+    let n: i32 = 4;
+    let result: Vec<Vec<String>> = Leetcode::solve_n_queens(n);
+    println!("N-queens solutions for n={n}: {:?}", result);
+}
+
 fn main() {
     two_sum();
     add_two_numbers();
@@ -493,4 +500,5 @@ fn main() {
     rotate();
     group_anagrams();
     my_pow();
+    solve_n_queens();
 }

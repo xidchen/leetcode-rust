@@ -1174,4 +1174,65 @@ impl Leetcode {
         }
         res
     }
+
+    // 51: /problems/n-queens/
+    pub fn solve_n_queens(n: i32) -> Vec<Vec<String>> {
+        let mut res = Vec::new();
+        let mut board = vec![vec!['.'; n as usize]; n as usize];
+        fn solve_n_queens_helper(
+            board: &mut Vec<Vec<char>>,
+            row: usize,
+            n: usize,
+            res: &mut Vec<Vec<String>>,
+        ) {
+            if row == n {
+                let solution: Vec<String> = board
+                    .iter()
+                    .map(|row| row.iter().collect())
+                    .collect();
+                res.push(solution);
+                return;
+            }
+            for col in 0..n {
+                if is_safe(board, row, col, n) {
+                    board[row][col] = 'Q';
+                    solve_n_queens_helper(board, row + 1, n, res);
+                    board[row][col] = '.';
+                }
+            }
+        }
+        fn is_safe(
+            board: &Vec<Vec<char>>,
+            row: usize,
+            col: usize,
+            n: usize
+        ) -> bool {
+            for i in 0..row {
+                if board[i][col] == 'Q' {
+                    return false;
+                }
+            }
+            let mut i = row as i32 - 1;
+            let mut j = col as i32 - 1;
+            while i >= 0 && j >= 0 {
+                if board[i as usize][j as usize] == 'Q' {
+                    return false;
+                }
+                i -= 1;
+                j -= 1;
+            }
+            let mut i = row as i32 - 1;
+            let mut j = col as i32 + 1;
+            while i >= 0 && j < n as i32 {
+                if board[i as usize][j as usize] == 'Q' {
+                    return false;
+                }
+                i -= 1;
+                j += 1;
+            }
+            true
+        }
+        solve_n_queens_helper(&mut board, 0, n as usize, &mut res);
+        res
+    }
 }
