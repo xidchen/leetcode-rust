@@ -1178,61 +1178,46 @@ impl Leetcode {
     // 51: /problems/n-queens/
     pub fn solve_n_queens(n: i32) -> Vec<Vec<String>> {
         let mut res = Vec::new();
-        let mut board = vec![vec!['.'; n as usize]; n as usize];
-        fn solve_n_queens_helper(
-            board: &mut Vec<Vec<char>>,
+        let mut queens = vec![0; n as usize];
+        fn backtrack(
             row: usize,
             n: usize,
+            cols: u32,
+            diag1: u32,
+            diag2: u32,
+            queens: &mut Vec<usize>,
             res: &mut Vec<Vec<String>>,
         ) {
             if row == n {
-                let solution: Vec<String> = board
+                let mut solution = vec![vec!['.'; n]; n];
+                for (r, &c) in queens.iter().enumerate() {
+                    solution[r][c] = 'Q';
+                }
+                let solution: Vec<String> = solution
                     .iter()
                     .map(|row| row.iter().collect())
                     .collect();
                 res.push(solution);
                 return;
             }
-            for col in 0..n {
-                if is_safe(board, row, col, n) {
-                    board[row][col] = 'Q';
-                    solve_n_queens_helper(board, row + 1, n, res);
-                    board[row][col] = '.';
-                }
+            let mut available = !(cols | diag1 | diag2) & ((1 << n) - 1);
+            while available != 0 {
+                let pos = available & (!available + 1);
+                let col = pos.trailing_zeros() as usize;
+                queens[row] = col;
+                backtrack(
+                    row + 1,
+                    n,
+                    cols | pos,
+                    (diag1 | pos) << 1,
+                    (diag2 | pos) >> 1,
+                    queens,
+                    res,
+                );
+                available &= available - 1;
             }
         }
-        fn is_safe(
-            board: &Vec<Vec<char>>,
-            row: usize,
-            col: usize,
-            n: usize
-        ) -> bool {
-            for i in 0..row {
-                if board[i][col] == 'Q' {
-                    return false;
-                }
-            }
-            let mut i = row as i32 - 1;
-            let mut j = col as i32 - 1;
-            while i >= 0 && j >= 0 {
-                if board[i as usize][j as usize] == 'Q' {
-                    return false;
-                }
-                i -= 1;
-                j -= 1;
-            }
-            let mut i = row as i32 - 1;
-            let mut j = col as i32 + 1;
-            while i >= 0 && j < n as i32 {
-                if board[i as usize][j as usize] == 'Q' {
-                    return false;
-                }
-                i -= 1;
-                j += 1;
-            }
-            true
-        }
-        solve_n_queens_helper(&mut board, 0, n as usize, &mut res);
+        backtrack(0, n as usize, 0, 0, 0, &mut queens, &mut res);
         res
     }
 }

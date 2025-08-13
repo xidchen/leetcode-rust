@@ -447,7 +447,7 @@ fn my_pow() {
 fn solve_n_queens() {
     let n: i32 = 4;
     let result: Vec<Vec<String>> = Leetcode::solve_n_queens(n);
-    println!("N-queens solutions for n={n}: {:?}", result);
+    println!("{n}-Queens: {:?}", result);
 }
 
 fn main() {
