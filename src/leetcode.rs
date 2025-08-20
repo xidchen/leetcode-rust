@@ -1220,4 +1220,34 @@ impl Leetcode {
         backtrack(0, n as usize, 0, 0, 0, &mut queens, &mut res);
         res
     }
+
+    // 52: /problems/n-queens-ii/
+    pub fn total_n_queens(n: i32) -> i32 {
+        fn backtrack(
+            row: usize,
+            n: usize,
+            cols: u32,
+            diag1: u32,
+            diag2: u32,
+        ) -> i32 {
+            if row == n {
+                return 1;
+            }
+            let mut count = 0;
+            let mut available = !(cols | diag1 | diag2) & ((1 << n) - 1);
+            while available != 0 {
+                let pos = available & (!available + 1);
+                count += backtrack(
+                    row + 1,
+                    n,
+                    cols | pos,
+                    (diag1 | pos) << 1,
+                    (diag2 | pos) >> 1
+                );
+                available &= available - 1;
+            }
+            count
+        }
+        backtrack(0, n as usize, 0, 0, 0)
+    }
 }

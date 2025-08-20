@@ -447,7 +447,14 @@ fn my_pow() {
 fn solve_n_queens() {
     let n: i32 = 4;
     let result: Vec<Vec<String>> = Leetcode::solve_n_queens(n);
-    println!("{n}-Queens: {:?}", result);
+    println!("Solve {n}-Queens: {:?}", result);
+}
+
+// 52: /problems/n-queens-ii/
+fn total_n_queens() {
+    let n: i32 = 4;
+    let result: i32 = Leetcode::total_n_queens(n);
+    println!("Total {n}-Queens: {:?}", result);
 }
 
 fn main() {
@@ -501,4 +508,5 @@ fn main() {
     group_anagrams();
     my_pow();
     solve_n_queens();
+    total_n_queens();
 }
