@@ -457,6 +457,13 @@ fn total_n_queens() {
     println!("Total {n}-Queens: {:?}", result);
 }
 
+// 53: /problems/maximum-subarray/
+fn max_sub_array() {
+    let nums: Vec<i32> = vec![-2,1,-3,4,-1,2,1,-5,4];
+    let result: i32 = Leetcode::max_sub_array(nums);
+    println!("Maximum subarray: {:?}", result);
+}
+
 fn main() {
     two_sum();
     add_two_numbers();
@@ -509,4 +516,5 @@ fn main() {
     my_pow();
     solve_n_queens();
     total_n_queens();
+    max_sub_array();
 }

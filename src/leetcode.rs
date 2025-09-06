@@ -1250,4 +1250,21 @@ impl Leetcode {
         }
         backtrack(0, n as usize, 0, 0, 0)
     }
+
+    // 53: /problems/maximum-subarray/
+    pub fn max_sub_array(nums: Vec<i32>) -> i32 {
+        let mut current_max = nums[0];
+        let mut global_max = nums[0];
+        for &num in nums.iter().skip(1) {
+            if current_max > 0 {
+                current_max += num;
+            } else {
+                current_max = num;
+            }
+            if current_max > global_max {
+                global_max = current_max;
+            }
+        }
+        global_max
+    }
 }
