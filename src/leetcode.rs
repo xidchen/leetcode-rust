@@ -1267,4 +1267,29 @@ impl Leetcode {
         }
         global_max
     }
+
+    // 54: /problems/spiral-matrix/
+    pub fn spiral_order(matrix: Vec<Vec<i32>>) -> Vec<i32> {
+        let mut res = Vec::new();
+        let mut matrix = matrix;
+        while !matrix.is_empty() {
+            res.extend(matrix.remove(0));
+            if matrix.is_empty() {
+                break;
+            }
+            let rows = matrix.len();
+            let cols = matrix[0].len();
+            if cols == 0 {
+                break;
+            }
+            let mut rotated = vec![vec![0; rows]; cols];
+            for i in 0..rows {
+                for j in 0..cols {
+                    rotated[cols - j - 1][i] = matrix[i][j];
+                }
+            }
+            matrix = rotated;
+        }
+        res
+    }
 }

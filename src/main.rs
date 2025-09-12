@@ -464,6 +464,17 @@ fn max_sub_array() {
     println!("Maximum subarray: {:?}", result);
 }
 
+// 54: /problems/spiral-matrix/
+fn spiral_order() {
+    let matrix: Vec<Vec<i32>> = vec![
+        vec![1, 2, 3],
+        vec![4, 5, 6],
+        vec![7, 8, 9],
+    ];
+    let result: Vec<i32> = Leetcode::spiral_order(matrix);
+    println!("Spiral matrix: {:?}", result);
+}
+
 fn main() {
     two_sum();
     add_two_numbers();
@@ -517,4 +528,5 @@ fn main() {
     solve_n_queens();
     total_n_queens();
     max_sub_array();
+    spiral_order();
 }
