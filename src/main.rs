@@ -475,6 +475,13 @@ fn spiral_order() {
     println!("Spiral matrix: {:?}", result);
 }
 
+// 55: /problems/jump-game/
+fn can_jump() {
+    let nums: Vec<i32> = vec![3, 2, 1, 0, 4];
+    let result: bool = Leetcode::can_jump(nums);
+    println!("Jump game: {:?}", result);
+}
+
 fn main() {
     two_sum();
     add_two_numbers();
@@ -529,4 +536,5 @@ fn main() {
     total_n_queens();
     max_sub_array();
     spiral_order();
+    can_jump();
 }
