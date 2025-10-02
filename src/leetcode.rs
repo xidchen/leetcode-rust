@@ -1307,4 +1307,21 @@ impl Leetcode {
         }
         true
     }
+
+    // 56: /problems/merge-intervals/
+    pub fn merge_intervals(intervals: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
+        let mut intervals = intervals;
+        intervals.sort_unstable_by(|a, b| a[0].cmp(&b[0]));
+        let mut merged = Vec::with_capacity(intervals.len());
+        merged.push(intervals[0].clone());
+        for interval in intervals.iter().skip(1) {
+            let last_merged = merged.last_mut().unwrap();
+            if interval[0] <= last_merged[1] {
+                last_merged[1] = last_merged[1].max(interval[1]);
+            } else {
+                merged.push(interval.clone());
+            }
+        }
+        merged
+    }
 }

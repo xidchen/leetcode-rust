@@ -482,6 +482,15 @@ fn can_jump() {
     println!("Jump game: {:?}", result);
 }
 
+// 56: /problems/merge-intervals/
+fn merge_intervals() {
+    let intervals: Vec<Vec<i32>> = vec![
+        vec![1, 3], vec![2, 6], vec![8, 10], vec![15, 18]
+    ];
+    let result: Vec<Vec<i32>> = Leetcode::merge_intervals(intervals);
+    println!("Merge intervals: {:?}", result);
+}
+
 fn main() {
     two_sum();
     add_two_numbers();
@@ -537,4 +546,5 @@ fn main() {
     max_sub_array();
     spiral_order();
     can_jump();
+    merge_intervals();
 }
