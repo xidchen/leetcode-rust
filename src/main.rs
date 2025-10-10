@@ -491,6 +491,16 @@ fn merge_intervals() {
     println!("Merge intervals: {:?}", result);
 }
 
+// 57: /problems/insert-interval/
+fn insert_interval() {
+    let intervals: Vec<Vec<i32>> = vec![
+        vec![1, 2], vec![3, 5], vec![6, 7], vec![8, 10], vec![12, 16]
+    ];
+    let new_interval: Vec<i32> = vec![4, 8];
+    let result: Vec<Vec<i32>> = Leetcode::insert_interval(intervals, new_interval);
+    println!("Insert interval: {:?}", result);
+}
+
 fn main() {
     two_sum();
     add_two_numbers();
@@ -547,4 +557,5 @@ fn main() {
     spiral_order();
     can_jump();
     merge_intervals();
+    insert_interval();
 }
