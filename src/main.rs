@@ -501,6 +501,13 @@ fn insert_interval() {
     println!("Insert interval: {:?}", result);
 }
 
+// 58: /problems/length-of-last-word/
+fn length_of_last_word() {
+    let s: String = String::from("Hello World");
+    let result: i32 = Leetcode::length_of_last_word(s);
+    println!("Length of last word: {:?}", result);
+}
+
 fn main() {
     two_sum();
     add_two_numbers();
@@ -558,4 +565,5 @@ fn main() {
     can_jump();
     merge_intervals();
     insert_interval();
+    length_of_last_word();
 }

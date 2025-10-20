@@ -1347,4 +1347,9 @@ impl Leetcode {
         }
         res
     }
+
+    // 58: /problems/length-of-last-word/
+    pub fn length_of_last_word(s: String) -> i32 {
+        s.trim_end().split_whitespace().last().map_or(0, |s| s.len() as i32)
+    }
 }
