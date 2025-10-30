@@ -508,6 +508,13 @@ fn length_of_last_word() {
     println!("Length of last word: {:?}", result);
 }
 
+// 59: /problems/spiral-matrix-ii/
+fn generate_matrix() {
+    let n: i32 = 3;
+    let result: Vec<Vec<i32>> = Leetcode::generate_matrix(n);
+    println!("Spiral matrix II: {:?}", result);
+}
+
 fn main() {
     two_sum();
     add_two_numbers();
@@ -566,4 +573,5 @@ fn main() {
     merge_intervals();
     insert_interval();
     length_of_last_word();
+    generate_matrix();
 }

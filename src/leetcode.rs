@@ -1352,4 +1352,29 @@ impl Leetcode {
     pub fn length_of_last_word(s: String) -> i32 {
         s.trim_end().split_whitespace().last().map_or(0, |s| s.len() as i32)
     }
+
+    // 59: /problems/spiral-matrix-ii/
+    pub fn generate_matrix(n: i32) -> Vec<Vec<i32>> {
+        let n = n as usize;
+        let mut res = vec![vec![0; n]; n];
+        let mut num = 1;
+        let mut row = 0;
+        let mut col = 0;
+        let directions = [(0, 1), (1, 0), (0, -1), (-1, 0)];
+        let mut dir_idx = 0;
+        for _ in 0..n * n {
+            res[row][col] = num;
+            num += 1;
+            let next_row = row as i32 + directions[dir_idx].0;
+            let next_col = col as i32 + directions[dir_idx].1;
+            if next_row < 0 || next_row >= n as i32
+                || next_col < 0 || next_col >= n as i32
+                || res[next_row as usize][next_col as usize] != 0 {
+                dir_idx = (dir_idx + 1) % 4;
+            }
+            row = (row as i32 + directions[dir_idx].0) as usize;
+            col = (col as i32 + directions[dir_idx].1) as usize;
+        }
+        res
+    }
 }
