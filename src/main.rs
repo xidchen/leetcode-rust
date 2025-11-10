@@ -515,6 +515,14 @@ fn generate_matrix() {
     println!("Spiral matrix II: {:?}", result);
 }
 
+// 60: /problems/permutation-sequence/
+fn get_permutation() {
+    let n: i32 = 4;
+    let k: i32 = 9;
+    let result: String = Leetcode::get_permutation(n, k);
+    println!("Permutation sequence: {:?}", result);
+}
+
 fn main() {
     two_sum();
     add_two_numbers();
@@ -574,4 +582,5 @@ fn main() {
     insert_interval();
     length_of_last_word();
     generate_matrix();
+    get_permutation();
 }
