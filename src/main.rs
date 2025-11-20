@@ -523,6 +523,15 @@ fn get_permutation() {
     println!("Permutation sequence: {:?}", result);
 }
 
+// 61: /problems/rotate-list/
+fn rotate_right() {
+    let head: Option<Box<ListNode>> = list_to_linked_list(vec![1, 2, 3, 4, 5]);
+    let k: i32 = 2;
+    let result_link_list: Option<Box<ListNode>> = Leetcode::rotate_right(head, k);
+    let result: Vec<i32> = linked_list_to_list(result_link_list);
+    println!("Rotate right: {:?}", result);
+}
+
 fn main() {
     two_sum();
     add_two_numbers();
@@ -583,4 +592,5 @@ fn main() {
     length_of_last_word();
     generate_matrix();
     get_permutation();
+    rotate_right();
 }

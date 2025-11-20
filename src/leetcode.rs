@@ -1396,4 +1396,39 @@ impl Leetcode {
         }
         res
     }
+
+    // 61: /problems/rotate-list/
+    pub fn rotate_right(head: Option<Box<ListNode>>, k: i32) -> Option<Box<ListNode>> {
+        let mut head = head;
+        if head.is_none() {
+            return None
+        }
+        let mut len = 0;
+        let mut ptr = head.as_ref();
+        while let Some(node) = ptr {
+            len += 1;
+            ptr = node.next.as_ref();
+        }
+        if len <= 1 {
+            return head;
+        }
+        let k = k % len;
+        if k == 0 {
+            return head;
+        }
+        let mut curr = head.as_mut();
+        for _ in 0..len - k - 1 {
+            curr = curr.unwrap().next.as_mut();
+        }
+        let mut new_head = curr.unwrap().next.take();
+        let mut tail = new_head.as_mut();
+        while let Some(node) = tail {
+            if node.next.is_none() {
+                node.next = head;
+                break;
+            }
+            tail = node.next.as_mut();
+        }
+        new_head
+    }
 }
