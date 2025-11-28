@@ -1431,4 +1431,16 @@ impl Leetcode {
         }
         new_head
     }
+
+    // 62: /problems/unique-paths/
+    pub fn unique_paths(m: i32, n: i32) -> i32 {
+        let (m, n) = (m as u64, n as u64);
+        let k = std::cmp::min(m - 1, n - 1);
+        let total = m + n - 2;
+        let mut res = 1;
+        for i in 1..=k {
+            res = res * (total - i + 1) / i;
+        }
+        res as i32
+    }
 }

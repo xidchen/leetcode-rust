@@ -532,6 +532,14 @@ fn rotate_right() {
     println!("Rotate right: {:?}", result);
 }
 
+// 62: /problems/unique-paths/
+fn unique_paths() {
+    let m: i32 = 3;
+    let n: i32 = 7;
+    let result: i32 = Leetcode::unique_paths(m, n);
+    println!("Unique paths: {:?}", result);
+}
+
 fn main() {
     two_sum();
     add_two_numbers();
@@ -593,4 +601,5 @@ fn main() {
     generate_matrix();
     get_permutation();
     rotate_right();
+    unique_paths();
 }
