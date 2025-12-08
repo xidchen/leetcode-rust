@@ -540,6 +540,13 @@ fn unique_paths() {
     println!("Unique paths: {:?}", result);
 }
 
+// 63: /problems/unique-paths-ii/
+fn unique_paths_with_obstacles() {
+    let obstacle_grid: Vec<Vec<i32>> = vec![vec![0, 0, 0], vec![0, 1, 0], vec![0, 0, 0]];
+    let result: i32 = Leetcode::unique_paths_with_obstacles(obstacle_grid);
+    println!("Unique paths II: {:?}", result);
+}
+
 fn main() {
     two_sum();
     add_two_numbers();
@@ -602,4 +609,5 @@ fn main() {
     get_permutation();
     rotate_right();
     unique_paths();
+    unique_paths_with_obstacles();
 }
