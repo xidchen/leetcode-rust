@@ -547,6 +547,13 @@ fn unique_paths_with_obstacles() {
     println!("Unique paths II: {:?}", result);
 }
 
+// 64: /problems/minimum-path-sum/
+fn min_path_sum() {
+    let grid: Vec<Vec<i32>> = vec![vec![1, 3, 1], vec![1, 5, 1], vec![4, 2, 1]];
+    let result: i32 = Leetcode::min_path_sum(grid);
+    println!("Minimum path sum: {:?}", result);
+}
+
 fn main() {
     two_sum();
     add_two_numbers();
@@ -610,4 +617,5 @@ fn main() {
     rotate_right();
     unique_paths();
     unique_paths_with_obstacles();
+    min_path_sum();
 }
